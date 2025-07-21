@@ -1,0 +1,53 @@
+User-agent: *
+Allow: /
+
+# Sitemap principal
+Sitemap: https://www.miqshop.com/sitemap.xml
+
+# Permitir acesso a recursos importantes
+Allow: /styles.css
+Allow: /script.js
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+
+# Bloquear ficheiros e diretórios desnecessários
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /cache/
+Disallow: /backup/
+Disallow: /*.pdf$
+Disallow: /search?
+Disallow: /*?utm_*
+Disallow: /*?ref=*
+Disallow: /*?source=*
+
+# Crawl-delay para ser respeitoso com os recursos do servidor
+Crawl-delay: 1
+
+# Informações específicas para diferentes bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Bloquear bots maliciosos conhecidos
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

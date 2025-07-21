@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Produtos - MIQSHOP | Laptops, Desktops, Impressoras e Acessórios</title>
+  <meta name="description" content="Explore nossa coleção completa de produtos eletrónicos: Laptops, Desktops, Impressoras, Discos Externos e Acessórios com os melhores preços em Moçambique.">
+  <meta name="keywords" content="produtos eletrónicos, laptops, desktops, impressoras, acessórios, MIQSHOP, Moçambique">
+  
+  <!-- CSS Frameworks -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  
+  <style>
+    /* ===== VARIÁVEIS CSS ===== */
+    :root {
+      --primary-red: #c40000;
+      --secondary-red: #d32f2f;
+      --modern-pink: #E91E63;
+      --modern-blue: #00BCD4;
+      --modern-green: #4CAF50;
+      --modern-orange: #FF9800;
+      --modern-purple: #9C27B0;
+      --modern-teal: #009688;
+      --text-dark: #333333;
+      --text-light: #666666;
+      --background-light: #f8f9fa;
+      --white: #ffffff;
+      --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+      --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
+      --shadow-strong: 0 8px 30px rgba(0, 0, 0, 0.2);
+      --border-radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--background-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: linear-gradient(135deg, var(--secondary-red), var(--primary-red));
+      color: var(--white);
+      padding: 2rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="headerPattern" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23headerPattern)"/></svg>');
+      pointer-events: none;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===== NAVEGAÇÃO DE CATEGORIAS ===== */
+    .category-nav {
+      background: var(--white);
+      padding: 2rem 0;
+      box-shadow: var(--shadow-medium);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .category-nav .nav-link {
+      color: var(--text-dark);
+      font-weight: 600;
+      padding: 1rem 1.5rem;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .category-nav .nav-link:hover,
+    .category-nav .nav-link.active {
+      background: linear-gradient(135deg, var(--secondary-red), var(--modern-pink));
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    /* ===== CARDS DE PRODUTOS ===== */
+    .product-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 1px solid #e0e0e0;
+      box-shadow: var(--shadow-light);
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--modern-orange), var(--modern-pink), var(--modern-blue), var(--modern-purple));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .product-card .card-body {
+      padding: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card .card-title {
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      line-height: 1.4;
+    }
+
+    .product-card .card-text {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+      line-height: 1.6;
+    }
+
+    .product-price {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--secondary-red), var(--modern-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+
+    .stock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--modern-green);
+      color: var(--white);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .btn-modern {
+      background: linear-gradient(135deg, var(--secondary-red), var(--modern-pink));
+      border: none;
+      color: var(--white) !important;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-modern:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-medium);
+      color: var(--white) !important;
+    }
+
+    /* ===== SEÇÕES DE CATEGORIA ===== */
+    .category-section {
+      padding: 4rem 0;
+      scroll-margin-top: 100px;
+    }
+
+    .category-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .category-title h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .category-title p {
+      color: var(--text-light);
+      font-size: 1.1rem;
+    }
+
+    /* ===== BOTÃO VOLTAR ===== */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, var(--secondary-red), var(--modern-pink));
+      color: var(--white);
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      z-index: 1001;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong);
+      color: var(--white);
+    }
+/* ===== RODAPÉ ===== */
+    .footer {
+      background: linear-gradient(135deg, var(--secondary-red), var(--primary-red));
+      color: var(--white);
+      padding: 2rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footerPattern" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23footerPattern)"/></svg>');
+    }
+
+    .footer p {
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== BOTÕES FLUTUANTES ===== */
+    .floating-buttons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 999;
+    }
+
+    .float-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .float-btn:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .whatsapp-float {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: var(--white);
+    }
+
+    .back-to-top {
+      background: linear-gradient(135deg, var(--secondary-red), var(--modern-pink));
+      color: var(--white);
+      display: none;
+    }
+
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .category-nav .nav-link {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .back-button {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-bottom: 2rem;
+        display: inline-block;
+      }
+      
+      .product-card img {
+        height: 200px;
+      }
+      
+      .product-card .card-body {
+        padding: 1.5rem;
+      }
+      
+      .product-card .card-title {
+        font-size: 1.1rem;
+      }
+      
+      .product-price {
+        font-size: 1.5rem;
+      }
+      
+      .category-title h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header h1 {
+        font-size: 1.5rem;
+      }
+      
+      .category-nav .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+      }
+      
+      .product-card img {
+        height: 180px;
+      }
+      
+      .product-card .card-body {
+        padding: 1rem;
+      }
+      
+      .product-card .card-title {
+        font-size: 1rem;
+      }
+      
+      .product-price {
+        font-size: 1.3rem;
+      }
+      
+      .category-title h2 {
+        font-size: 1.8rem;
+      }
+      
+      .btn-modern {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ===== GRID LAYOUT CONSISTENTE ===== */
+    .row.g-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .product-item {
+      display: contents;
+    }
+    
+    @media (max-width: 768px) {
+      .row.g-4 {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .row.g-4 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+    
+    /* ===== AJUSTES GERAIS DE IMAGEM ===== */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Botão Voltar -->
+  <a href="index.html" class="back-button">
+    <i class="fas fa-arrow-left me-2"></i>Voltar à Página Principal
+  </a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <h1><i class="fas fa-box me-3"></i>Nossos Produtos</h1>
+      <p>Explore nossa coleção completa de produtos eletrónicos premium</p>
+    </div>
+  </header>
+
+  <!-- Navegação de Categorias -->
+  <nav class="category-nav">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <a href="#laptops" class="nav-link">
+              <i class="fas fa-laptop"></i>Laptops
+            </a>
+            <a href="#desktops" class="nav-link">
+              <i class="fas fa-desktop"></i>Desktops
+            </a>
+            <a href="#impressoras" class="nav-link">
+              <i class="fas fa-print"></i>Impressoras
+            </a>
+            <a href="#discos-externos" class="nav-link">
+              <i class="fas fa-hdd"></i>Discos Externos
+            </a>
+            <a href="#acessorios" class="nav-link">
+              <i class="fas fa-plug"></i>Acessórios
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Seção Laptops -->
+  <section id="laptops" class="category-section">
+    <div class="container">
+      <div class="category-title">
+        <h2><i class="fas fa-laptop me-3" style="color: var(--modern-purple);"></i>Laptops</h2>
+        <p>Potência e portabilidade para todas as suas necessidades</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="product-item">
+          <div class="product-card">
+            <img src="hp-250-g9-celeron-n4500-1.webp" class="card-img-top" alt="Laptop HP 250 G9" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP 250 G9</h3>
+              <p class="card-text">Celeron Dual Core, 8GB RAM, 256GB SSD, Tela 15.6", Windows 11</p>
+              <div class="product-price">23.400 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-item">
+          <div class="product-card">
+            <img src="hp 250 g10.jpg" class="card-img-top" alt="Laptop HP 250 G10" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP 250 G10</h3>
+              <p class="card-text">Intel Core i3-1315U, 8GB RAM, 512GB SSD, Tela 15.6"</p>
+              <div class="product-price">34.800 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-item">
+          <div class="product-card">
+            <img src="hp 255 g10.webp" class="card-img-top" alt="Laptop HP 255 G10" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP 255 G10</h3>
+              <p class="card-text">Ryzen 5 7350U, 16GB RAM, 512GB SSD, Tela 15.6"</p>
+              <div class="product-price">42.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="HP Probook 440 G10.jpg" class="card-img-top" alt="HP PROBOOK 440 G10" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP PROBOOK 440 G10</h3>
+              <p class="card-text">Intel Core i5-1335U, 8GB RAM, 256GB SSD, Tela 14"</p>
+              <div class="product-price">52.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="elitebook 640 g11.jpg" class="card-img-top" alt="HP ELITEBOOK 640 G11" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP ELITEBOOK 640 G11</h3>
+              <p class="card-text">Intel Core i7-1255U, 16GB RAM, 512GB SSD, Tela 15.6"</p>
+              <div class="product-price">84.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="hp_envy_x360_14_es0013dx_cor_i5_13th_gen.jpeg" class="card-img-top" alt="HP ENVY X360 14" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP ENVY X360 14-ES0013DX</h3>
+              <p class="card-text">Core Ultra 5 150U, 8GB RAM, 512GB SSD, Tela 15.6"</p>
+              <div class="product-price">95.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="HP Probook 460 G11.avif" class="card-img-top" alt="HP PROBOOK 460 G11" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP PROBOOK 460 G11</h3>
+              <p class="card-text">Ultra 5 125U, 16GB RAM, 512GB SSD, Tela 16", Win11 Pro</p>
+              <div class="product-price">66.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="HP Probook 440 G10.jpg" class="card-img-top" alt="HP PROBOOK 460 G11" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP PROBOOK 440 G10</h3>
+              <p class="card-text">Intel Core i7-1355U, 16GB RAM, 512GB SSD, Tela 14"</p>
+              <div class="product-price">69.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="dell latitude 3520.jpg" class="card-img-top" alt="DELL LATITUDE 3520" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DELL LATITUDE 3520</h3>
+              <p class="card-text">Intel Core i7-1165G7, 8GB RAM, 512GB SSD, Tela 15.6"</p>
+              <div class="product-price">58.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="dell latitude 7530.webp" class="card-img-top" alt="DELL LATITUDE 7530" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DELL LATITUDE 7530</h3>
+              <p class="card-text">Intel Core i7-1265U, 16GB RAM, 512GB SSD, Tela 15.6"</p>
+              <div class="product-price">79.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="dell latitude 9450.webp" class="card-img-top" alt="DELL LATITUDE 9450" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DELL LATITUDE 9450 2-IN-1</h3>
+              <p class="card-text">Ultra 7 165U, 32GB RAM, 1TB SSD, Tela 15.6" Touchscreen x360 HYBRID</p>
+              <div class="product-price">136.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="dell inspiron 7430.jpg" class="card-img-top" alt="DELL INSPIRON 7430" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DELL INSPIRON 7430 2-IN-1</h3>
+              <p class="card-text">Intel Core i7-1355U, 16GB RAM DDR5, 1TB SSD, Tela 15.6" Touchscreen x360</p>
+              <div class="product-price">142.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="dell precision 7680.jpg" class="card-img-top" alt="DELL PRECISION 7680" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DELL PRECISION 7680</h3>
+              <p class="card-text">Intel Core i9-1395oHX, 32GB RAM, 1TB SSD, RTX 2000 8GB, Tela 16"</p>
+              <div class="product-price">149.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="dell-xps-13-plus-9320-main.webp" class="card-img-top" alt="DELL XPS 13 PLUS 9320" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DELL XPS 13 PLUS 9320</h3>
+              <p class="card-text">Intel Core i7-1360P, 16GB RAM DDR5, 512GB SSD, Tela 13.4"</p>
+              <div class="product-price">185.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="product-item">
+          <div class="product-card">
+            <img src="ideapad.webp" class="card-img-top" alt="LENOVO IDEAPAD 3" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">LENOVO IDEAPAD 3</h3>
+              <p class="card-text">Intel Core i3-1265U, 8GB RAM, 512B SSD, Tela 15.6"</p>
+              <div class="product-price">36.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="lenovo ideaped 1 ryzen 5.avif" class="card-img-top" alt="LENOVO IDEAPAD 1" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">LENOVO IDEAPAD 1</h3>
+              <p class="card-text">Ryzen 5 7520u, 16GB RAM, 1TB SSD, Tela 15.6"</p>
+              <div class="product-price">47.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="lenovo X1 Gen9.png" class="card-img-top" alt="LENOVO THINKPAD X1 GEN9" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">LENOVO THINKPAD X1 GEN9</h3>
+              <p class="card-text">Ultra 7 165U, 32GB RAM, 512GB SSD, Tela 15.6" Touchscreen X360 2-in-1</p>
+              <div class="product-price">120.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="lenovo thinkpad e14.avif" class="card-img-top" alt="LENOVO THINKPAD E14" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">LENOVO THINKPAD E14"</h3>
+              <p class="card-text">Intel Core i5-1335U, 16GB RAM, 512GB SSD, Tela 14"</p>
+              <div class="product-price">72.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="lenovo-yoga-pro-7-1.webp" class="card-img-top" alt="LENOVO YOGA 9 14IMH9" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">LENOVO YOGA 9 14IMH9"</h3>
+              <p class="card-text">Ultra 7 155H, 32GB RAM, 512GB SSD, Tela 14" 2,8K Oled Touchscreen X360 2-in-1</p>
+              <div class="product-price">125.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="LOQ_15IAX9E_CT1_02.avif" class="card-img-top" alt="LENOVO LOQ 15IAX9" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">LENOVO LOQ 15IAX9"</h3>
+              <p class="card-text">Intel Core i5-12450HX, 8GB RAM, 512GB SSD, Tela 15.6", Nvidia RTX 3050 6GB</p>
+              <div class="product-price">78.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="lenovo thinkpad p14s.jpg" class="card-img-top" alt="LENOVO THINKPAD P14s GEN5" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">LENOVO THINKPAD P14s GEN5</h3>
+              <p class="card-text">Workstation Ultra 7, 32GB RAM, 512GB SSD, Nvidia RTX 500 Ada 4GB, Tela 14" Touchscreen</p>
+              <div class="product-price">99.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="LENOVO THINKBOOK 16-IML.avif" class="card-img-top" alt="LENOVO THINKBOOK 16-IML " loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">LENOVO THINKBOOK 16-IML</h3>
+              <p class="card-text">Ultra 7 155H, 8GB RAM, 512GB SSD, Tela 16" WUXGA FREEDOS</p>
+              <div class="product-price">86.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="product-item">
+          <div class="product-card">
+            <img src="vivobook_e510_1_1.jpg" class="card-img-top" alt="ASUS VIVOBBOK E510" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">ASUS VIVOBBOK E510</h3>
+              <p class="card-text">Intel Celeron N4020, 4GB RAM, 512GB SSD, Tela 14"</p>
+              <div class="product-price">26.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="Asus Tuff Gam.webp" class="card-img-top" alt="ASUS TUF GAMING FA506NF" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">ASUS TUF GAMING FA506NF</h3>
+              <p class="card-text">AMD Ryzen 5, 8GB RAM, 512GB SSD, RTX 2050 4GB, Tela 15.6"</p>
+              <div class="product-price">72.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="Asus Rog Strix.jpg" class="card-img-top" alt="ASUS ROG STRIX G18" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">ASUS ROG STRIX G18</h3>
+              <p class="card-text">Intel Core i9-13980HX, 32GB RAM, 1TB SSD, RTX 4070 8GB, Tela 15.6"</p>
+              <div class="product-price">72.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="Acer-Spin-5-SP513-55Na.jpg" class="card-img-top" alt="ACER SPIN 5" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">ACER SPIN 5</h3>
+              <p class="card-text">Intel Core i7-1165G7, 16GB RAM, 1tB SSD, Tela 13.6" Touchscreen X360</p>
+              <div class="product-price">88.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="acer swift go.jpg" class="card-img-top" alt="ACER SWIFT GO 14" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">ACER SWIFT GO 14</h3>
+              <p class="card-text">Intel Core i5-1335U, 16GB RAM, 512GB SSD, Tela 14"</p>
+              <div class="product-price">82.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="acer aspire.webp" class="card-img-top" alt="LENOVO THINKPAD E14" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">ACER ASPIRE LITE 14</h3>
+              <p class="card-text">Intel Core i5-1335U, 16GB RAM, 512GB SSD, Tela 14"</p>
+              <div class="product-price">39.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="macbook i5.jpeg" class="card-img-top" alt="MACBOOK AIR 2020" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">MACBOOK AIR 2020</h3>
+              <p class="card-text">Intel Core i5, 8GB RAM, 512GB SSD, Tela 14"</p>
+              <div class="product-price">72.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="macbook m3.jpg" class="card-img-top" alt="MACBOOK AIR" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">MACBOOK AIR</h3>
+              <p class="card-text">Chip M3, 16GB RAM, 256GB SSD, Tela 13.6"</p>
+              <div class="product-price">95.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="macbook-air m4.jpg" class="card-img-top" alt="MACBOOK AIR" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">MACBOOK AIR</h3>
+              <p class="card-text">Chip M4, 16GB RAM, 256GB SSD, Tela 13.6"</p>
+              <div class="product-price">105.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="macbook m33.jpg" class="card-img-top" alt="MACBOOK AIR" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">MACBOOK AIR</h3>
+              <p class="card-text">Chip M3, 24GB RAM, 512GB SSD, Tela 13.6"</p>
+              <div class="product-price">122.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Desktops -->
+  <section id="desktops" class="category-section">
+    <div class="container">
+      <div class="category-title">
+        <h2><i class="fas fa-desktop me-3" style="color: var(--modern-blue);"></i>Desktops</h2>
+        <p>Potência máxima para trabalho e entretenimento</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="product-item">
+          <div class="product-card">
+            <img src="Dell-Inspiron-3030-14th-Gen-i3-Desktop.jpg" class="card-img-top" alt="Desktop Dell OptiPlex" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DESKTOP COMPLETO DELL OPTIPLEX 7090</h3>
+              <p class="card-text">Intel Core i7-11700, 16GB RAM DDR4, 512GB SSD, Monitor 23.8", Teclado & Mouse </p>
+              <div class="product-price">58.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-item">
+          <div class="product-card">
+            <img src="all_in_one_hp_g4_200_i5_22_41tb-1690986270-361-e.png" class="card-img-top" alt="All-in-One HP" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">ALL-IN-ONE HP 24-DF1033</h3>
+              <p class="card-text">Intel Core i5-1135G7, 8GB RAM, 256GB SSD, Tela 23.8" Full HD touchscreen, Webcam HD. Design elegante e funcional.</p>
+              <div class="product-price">62.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-item">
+          <div class="product-card">
+            <img src="290 G9.jpg" class="card-img-top" alt="HP 290 G9" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP 290 G9</h3>
+              <p class="card-text">Intel Core i5-12500, 8GB RAM, 512GB SSD, Win11</p>
+              <div class="product-price">46.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="Computador-Desktop-Completo-HP-Pro-Tower-290-G9-e-monitor-P24H-G5.webp" class="card-img-top" alt="Desktop Gaming" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DESKTOP COMPLETO HP 290 G9</h3>
+              <p class="card-text">Intel Core i5-12500, 8GB RAM, 512GB SSD, Monitor 23.8", Teclado & Mouse</p>
+              <div class="product-price">54.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="all in one.png" class="card-img-top" alt="DESKTOP COMPLETO HP 290 G9" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DESKTOP COMPLETO HP 290 G9</h3>
+              <p class="card-text">Intel Core i3-12500, 4GB RAM, 1TB HDD, Monitor 19.5", Teclado & Mouse</p>
+              <div class="product-price">46.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="20240124152652HP-ProDesk-400-G9-1.webp" class="card-img-top" alt="iMac" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP PRODESK 400 G9</h3>
+              <p class="card-text">Intel Core i7-13700, 8GB RAM, 512GB SSD, Fre DOS</p>
+              <div class="product-price">69.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="Dell-Vostro-3910-MT-Intel-Core-i7-127001TB-HDD-8GB-DDR4-3200.webp" class="card-img-top" alt="DELL VOSTRO 3910" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DELL VOSTRO 3910</h3>
+              <p class="card-text">Intel Core i5 12th Gen, 8GB RAM, 256GB SSD, Tela 24" 4.5K Retina, macOS. Design icónico e performance excepcional.</p>
+              <div class="product-price">38.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="dell optiplex7090.png" class="card-img-top" alt="DELL OPTIPLEX 7090" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">DELL OPTIPLEX 7090</h3>
+              <p class="card-text">Intel Core i5-11500, 8GB RAM, 256gB SSD, Win11</p>
+              <div class="product-price">32.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Impressoras -->
+  <section id="impressoras" class="category-section">
+    <div class="container">
+      <div class="category-title">
+        <h2><i class="fas fa-print me-3" style="color: var(--modern-pink);"></i>Impressoras</h2>
+        <p>Soluções de impressão para todas as necessidades</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="product-item">
+          <div class="product-card">
+            <img src="smart tank.jpg" class="card-img-top" alt="Impressora HP LaserJet" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP LASERJET PRO M404DN</h3>
+              <p class="card-text">Impressora laser monocromática, 38 ppm, Duplex automático, Rede Ethernet, Bandeja 250 folhas. Ideal para escritórios.</p>
+              <div class="product-price">18.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-item">
+          <div class="product-card">
+            <img src="canon.jpg" class="card-img-top" alt="Impressora Canon" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">CANON PIXMA G3010</h3>
+              <p class="card-text">Multifuncional tanque de tinta, WiFi, Impressão, cópia e scanner, Baixo custo por página. Economia e qualidade.</p>
+              <div class="product-price">15.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-item">
+          <div class="product-card">
+            <img src="L3250_SPT.png" class="card-img-top" alt="Impressora Epson" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">EPSON ECOTANK L3250</h3>
+              <p class="card-text">Sistema de tanque de tinta, WiFi Direct, Impressão móvel, Scanner e copiadora. Sustentabilidade e eficiência.</p>
+              <div class="product-price">16.800 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="impressora.webp" class="card-img-top" alt="HP COLOR LASERJET MFP M4303FDW" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HP COLOR LASERJET MFP M4303FDW</h3>
+              <p class="card-text">Multifuncional tanque de tinta, WiFi, Duplex automático, ADF, Impressão móvel. Produtividade e economia.</p>
+              <div class="product-price">48.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="impressora-evolis-primacy-duplex.jpg" class="card-img-top" alt="EVOLIS PRIMACY" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Sob Encomenda
+              </div>
+              <h3 class="card-title">EVOLIS PRIMACY</h3>
+              <p class="card-text">A Evolis Primacy é uma impressora de cartões plásticos de alto desempenho, ideal para grandes volumes com qualidade profissional. Perfeita para ambientes que exigem eficiência e segurança na emissão de cartões.</p>
+              <div class="product-price">118.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="PRIMACY EVOLIS.jpg" class="card-img-top" alt="EVOLIS PRIMACY 2" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Sob Encomenda
+              </div>
+              <h3 class="card-title">EVOLIS PRIMACY 2</h3>
+              <p class="card-text">A Primacy 2 é uma impressora de cartões direta por sublimação térmica com tecnologia rewrite (regravável), feita para imprimir cartões de alta qualidade com velocidade e segurança.</p>
+              <div class="product-price">145.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="evolis issengo.jpg" class="card-img-top" alt="EVOLIS ISSENGO" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Sob Encomenda
+              </div>
+              <h3 class="card-title">EVOLIS ISSENGO</h3>
+              <p class="card-text">A Evolis Issengo é uma impressora compacta e segura, ideal para emissão instantânea de cartões de crédito e débito em bancos e quiosques.</p>
+              <div class="product-price">340.000 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="avansia-lamination-card-printer-evolis.webp" class="card-img-top" alt="EVOLIS AVANSIA" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Sob Encomenda
+              </div>
+              <h3 class="card-title">EVOLIS AVANSIA</h3>
+              <p class="card-text">A Evolis Avansia é uma impressora de cartões por retransferência ideal para aplicações que exigem alta qualidade de impressão, segurança e durabilidade. Com resolução de 600 dpi, imprime borda a borda em cartões PVC, PET, policarbonato e outros.</p>
+              <div class="product-price">495.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Discos Externos -->
+  <section id="discos-externos" class="category-section">
+    <div class="container">
+      <div class="category-title">
+        <h2><i class="fas fa-hdd me-3" style="color: var(--modern-teal);"></i>Discos Externos</h2>
+        <p>Armazenamento seguro e portátil para seus dados</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="product-item">
+          <div class="product-card">
+            <img src="disco externoo.jpg" class="card-img-top" alt="HD Externo Seagate" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">SEAGATE EXPANSION 1TB</h3>
+              <p class="card-text">HD Externo portátil, USB 3.0, Design compacto, Software de backup incluído. Ideal para backup e transporte de dados.</p>
+              <div class="product-price">4.999 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="disco externoo.jpg" class="card-img-top" alt="HD Externo WD" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">SEAGATE EXPANSION 4TB</h3>
+              <p class="card-text">HD Externo portátil, USB 3.0, Design compacto, Software de backup incluído. Ideal para backup e transporte de dados.</p>
+              <div class="product-price">10.400 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="disco externo toshiba.jpg" class="card-img-top" alt="SSD Externo Samsung" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">TOSHIBA CANVIO BASICS 1TB</h3>
+              <p class="card-text">HD Externo portátil, USB 3.0, Design compacto, Software de backup incluído. Ideal para backup e transporte de dados.</p>
+              <div class="product-price">5.400 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="disco externo toshiba.jpg" class="card-img-top" alt="HD Externo Toshiba" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">TOSHIBA CANVIO BASICS 2TB</h3>
+              <p class="card-text">HD Externo portátil, USB 3.0, Design compacto, Software de backup incluído. Ideal para backup e transporte de dados.</p>
+              <div class="product-price">6.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="MyPassport-1TB-2TB-Black-Hero.png.thumb.1280.1280.png" class="card-img-top" alt="WD MY PASSPORT 1TB" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">WD MY PASSPORT 1TB</h3>
+              <p class="card-text">SSD Externo robusto, USB 3.2, Velocidade até 2.000 MB/s, Resistente à água e poeira. Para profissionais exigentes.</p>
+              <div class="product-price">5.400 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="MyPassport-1TB-2TB-Black-Hero.png.thumb.1280.1280.png" class="card-img-top" alt="WD MY PASSPORT 2TB" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">WD MY PASSPORT 2TB</h3>
+              <p class="card-text">SSD Externo robusto, USB 3.2, Velocidade até 2.000 MB/s, Resistente à água e poeira. Para profissionais exigentes.</p>
+              <div class="product-price">6.600 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="sandisk extreme.jpg" class="card-img-top" alt="SSD Externo SanDisk" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">SANDISK EXTREME PRO 1TB</h3>
+              <p class="card-text">SSD Externo robusto, USB 3.2, Velocidade até 2.000 MB/s, Resistente à água e poeira. Para profissionais exigentes.</p>
+              <div class="product-price">10.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="sandisk extreme.jpg" class="card-img-top" alt="HD Externo Seagate Desktop" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">SANDISK EXTREME PRO 2TB</h3>
+              <p class="card-text">SSD Externo robusto, USB 3.2, Velocidade até 2.000 MB/s, Resistente à água e poeira. Para profissionais exigentes.</p>
+              <div class="product-price">14.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Acessórios -->
+  <section id="acessorios" class="category-section">
+    <div class="container">
+      <div class="category-title">
+        <h2><i class="fas fa-plug me-3" style="color: var(--modern-orange);"></i>Acessórios</h2>
+        <p>Complete seu setup com os melhores acessórios</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="product-item">
+          <div class="product-card">
+            <img src="kit gamer.jpg" class="card-img-top" alt="Teclado e Mouse" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">KIT GAMING 4 EM 1</h3>
+              <p class="card-text">Teclado, Mouse, Headset & Mousepad RGB</p>
+              <div class="product-price">4.500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="mouse sem fio.jpg" class="card-img-top" alt="Monitor Dell" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">MOUSE SEM FIO</h3>
+              <p class="card-text">Mouse sem fio com recptor USB.</p>
+              <div class="product-price">750 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="Mouse-Dell-com-fio-USB-MS116-570-AAIM-0.webp" class="card-img-top" alt="Webcam Logitech" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">WEBCAM LOGITECH C920 HD</h3>
+              <p class="card-text">Mouse com fio de tamanho normal e ambidestro.</p>
+              <div class="product-price">460 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="TECLADO SEM FIO.jpg" class="card-img-top" alt="Headset Gamer" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">TECLADO SEM FIO</h3>
+              <p class="card-text">Teclado sem fio Bloutooth com bateria interna.</p>
+              <div class="product-price">1.800 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="hub-usb-3-0-com-4-portas-5-0gbps-de-alta-aelocidade--6-.png" class="card-img-top" alt="Hub USB" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">HUB USB 3.0</h3>
+              <p class="card-text">Hub USB com 4 portas, USB 3.0.</p>
+              <div class="product-price">7500 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="HP-TECLADO-PT.jpg" class="card-img-top" alt="Hub USB" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">TECLADO COM FIO PT</h3>
+              <p class="card-text">Teclado Portugues com tecnologia USB Plug.</p>
+              <div class="product-price">950 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="power bank.webp" class="card-img-top" alt="Hub USB" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">CARREGADOR PORTATIL</h3>
+              <p class="card-text">Power Bank 10000mAh com USB-C.</p>
+              <div class="product-price">1.800 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-card">
+            <img src="cabo hdmi.webp" class="card-img-top" alt="Suporte para Laptop" loading="lazy">
+            <div class="card-body">
+              <div class="stock-badge">
+                <i class="fas fa-check-circle"></i>Em Stock
+              </div>
+              <h3 class="card-title">CABO HDMI 5M</h3>
+              <p class="card-text">Cabo HDMI de alta velocidade.</p>
+              <div class="product-price">2.200 MT</div>
+              <a href="https://wa.me/258878372764" target="_blank" rel="noopener" class="btn btn-modern w-100">
+                <i class="fas fa-shopping-cart"></i>Comprar Agora
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 MIQSHOP - Todos os direitos reservados. Sim, Pode Confiar!</p>
+    </div>
+  </footer>
+
+  <!-- Botões Flutuantes -->
+  <div class="floating-buttons">
+    <a href="#" class="float-btn back-to-top" id="backToTop" aria-label="Voltar ao topo">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+    <a href="https://wa.me/258878372764" class="float-btn whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar via WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Botão "Voltar ao Topo"
+      const backToTopButton = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopButton.style.display = 'flex';
+        } else {
+          backToTopButton.style.display = 'none';
+        }
+      });
+
+      backToTopButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Navegação suave para categorias
+      document.querySelectorAll('.category-nav .nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            // Remove active class from all links
+            document.querySelectorAll('.category-nav .nav-link').forEach(l => l.classList.remove('active'));
+            // Add active class to clicked link
+            this.classList.add('active');
+            
+            // Scroll to target with offset
+            const offsetTop = targetElement.offsetTop - 120;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Highlight active category on scroll
+      const sections = document.querySelectorAll('.category-section');
+      const navLinks = document.querySelectorAll('.category-nav .nav-link');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 150;
+          if (window.scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // Check URL hash on page load
+      if (window.location.hash) {
+        const targetId = window.location.hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+        const targetLink = document.querySelector(`a[href="#${targetId}"]`);
+        
+        if (targetElement && targetLink) {
+          // Add active class to corresponding nav link
+          document.querySelectorAll('.category-nav .nav-link').forEach(l => l.classList.remove('active'));
+          targetLink.classList.add('active');
+          
+          // Scroll to target after a short delay to ensure page is loaded
+          setTimeout(() => {
+            const offsetTop = targetElement.offsetTop - 120;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }, 100);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+
+
