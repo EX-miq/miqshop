@@ -93,18 +93,32 @@
 
     .back-link {
       position: absolute;
-      top: 2rem;
-      left: 2rem;
+      top: 20px;
+      left: 20px;
       color: var(--white);
       font-size: 1.5rem;
       text-decoration: none;
       transition: var(--transition);
       z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .back-link:hover {
       color: var(--white);
       transform: translateX(-5px);
+    }
+
+    @media (max-width: 768px) {
+      .back-link {
+        top: 10px;
+        left: 10px;
+        font-size: 1.2rem;
+        padding: 8px 12px;
+        background-color: rgba(0,0,0,0.3);
+        border-radius: 8px;
+      }
     }
 
     /* ===== CONTEÚDO PRINCIPAL ===== */
@@ -530,16 +544,13 @@
 }
   </style>
 </head>
- <!-- Botão Voltar -->
-  <a href="index.html" class="back-button">
-    <i class="fas fa-arrow-left me-2"></i>Voltar à Página Principal
-  </a>
+
 
 <body>
   <!-- Cabeçalho -->
   <header class="header">
-    <a href="javascript:history.back()" class="back-link">
-      <i class="fas fa-arrow-left"></i>
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left me-2"></i>Voltar à Página Principal
     </a>
     <div class="container">
       <h1>Política de Privacidade</h1>
