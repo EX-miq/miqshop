@@ -956,5 +956,301 @@ class App {
   }
 }
 
+// ===== CARRINHO DE COMPRAS =====
+class ShoppingCart {
+  constructor() {
+    this.items = this.loadFromStorage();
+    this.init();
+  }
+
+  init() {
+    this.render();
+    this.updateBadge();
+  }
+
+  loadFromStorage() {
+    const stored = localStorage.getItem('miqshop_cart');
+    return stored ? JSON.parse(stored) : [];
+  }
+
+  saveToStorage() {
+    localStorage.setItem('miqshop_cart', JSON.stringify(this.items));
+  }
+
+  addItem(product) {
+    const existingItem = this.items.find(item => item.id === product.id);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      this.items.push({ ...product, quantity: 1 });
+    }
+    this.saveToStorage();
+    this.render();
+    this.updateBadge();
+    this.showNotification(`${product.name} adicionado ao carrinho!`);
+  }
+
+  removeItem(productId) {
+    this.items = this.items.filter(item => item.id !== productId);
+    this.saveToStorage();
+    this.render();
+    this.updateBadge();
+  }
+
+  updateQuantity(productId, quantity) {
+    const item = this.items.find(item => item.id === productId);
+    if (item) {
+      if (quantity <= 0) {
+        this.removeItem(productId);
+      } else {
+        item.quantity = quantity;
+        this.saveToStorage();
+        this.render();
+        this.updateBadge();
+      }
+    }
+  }
+
+  getTotal() {
+    return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+  }
+
+  getTax() {
+    return this.getTotal() * 0.16;
+  }
+
+  getFinalTotal() {
+    return this.getTotal() + this.getTax();
+  }
+
+  render() {
+    const cartItemsContainer = document.getElementById('cartItems');
+    if (!cartItemsContainer) return;
+    
+    if (this.items.length === 0) {
+      cartItemsContainer.innerHTML = `
+        <div class="cart-empty">
+          <i class="fas fa-shopping-cart"></i>
+          <p>Seu carrinho está vazio</p>
+          <small>Adicione produtos para começar</small>
+        </div>
+      `;
+      return;
+    }
+
+    cartItemsContainer.innerHTML = this.items.map(item => {
+      const itemTotal = item.price * item.quantity;
+      return `
+        <div class="cart-item">
+          <div class="cart-item-image">${item.image}</div>
+          <div class="cart-item-details">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${this.formatPrice(item.price)}</div>
+            <div class="cart-item-quantity">
+              <button onclick="window.cart.updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+              <input type="number" value="${item.quantity}" min="1" onchange="window.cart.updateQuantity(${item.id}, parseInt(this.value))">
+              <button onclick="window.cart.updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+            </div>
+            <div class="cart-item-price">Total: ${this.formatPrice(itemTotal)}</div>
+            <div class="cart-item-remove" onclick="window.cart.removeItem(${item.id})">
+              <i class="fas fa-trash"></i> Remover
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    this.updateSummary();
+  }
+
+  updateSummary() {
+    const subtotalEl = document.getElementById('subtotal');
+    const taxEl = document.getElementById('tax');
+    const totalEl = document.getElementById('total');
+    
+    if (subtotalEl) subtotalEl.textContent = this.formatPrice(this.getTotal());
+    if (taxEl) taxEl.textContent = this.formatPrice(this.getTax());
+    if (totalEl) totalEl.textContent = this.formatPrice(this.getFinalTotal());
+  }
+
+  updateBadge() {
+    const badges = document.querySelectorAll('#cartBadge, #cartBadgeMobile');
+    const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
+    badges.forEach(badge => badge.textContent = totalItems);
+  }
+
+  formatPrice(price) {
+    return new Intl.NumberFormat('pt-MZ', { style: 'currency', currency: 'MZN', minimumFractionDigits: 2 }).format(price).replace('MZN', 'MT');
+  }
+
+  showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'alert alert-success alert-dismissible fade show';
+    notification.style.cssText = 'position: fixed; top: 120px; right: 20px; z-index: 9999; min-width: 300px;';
+    notification.innerHTML = `${message}<button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
+  }
+
+  clear() {
+    this.items = [];
+    this.saveToStorage();
+    this.render();
+    this.updateBadge();
+  }
+}
+
+// ===== SISTEMA DE PAGAMENTO =====
+class PaymentSystem {
+  constructor() {
+    this.selectedPayment = null;
+    this.init();
+  }
+
+  init() {
+    this.setupPaymentOptions();
+    this.setupPaymentForm();
+  }
+
+  setupPaymentOptions() {
+    const options = document.querySelectorAll('.payment-option');
+    options.forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('active'));
+        option.classList.add('active');
+        this.selectedPayment = option.dataset.payment;
+        this.showPaymentDetails(this.selectedPayment);
+      });
+    });
+  }
+
+  setupPaymentForm() {
+    const form = document.getElementById('paymentForm');
+    if (form) {
+      form.addEventListener('submit', (e) => this.handlePaymentSubmit(e));
+    }
+  }
+
+  showPaymentDetails(paymentMethod) {
+    const detailsDiv = document.getElementById('paymentDetails');
+    const instructionsDiv = document.getElementById('paymentInstructions');
+    
+    const instructions = {
+      mpesa: `<strong>M-Pesa:</strong> +258 87 837 2764 | Valor: ${window.cart.formatPrice(window.cart.getFinalTotal())}`,
+      emola: `<strong>E-Mola:</strong> +258 87 837 2764 | Valor: ${window.cart.formatPrice(window.cart.getFinalTotal())}`,
+      ponto24: `<strong>Ponto 24:</strong> Valor: ${window.cart.formatPrice(window.cart.getFinalTotal())}`,
+      bank: `<strong>BIM:</strong> 1244528237 | <strong>BCI:</strong> 33695753410001 | <strong>FNB:</strong> 4576770510001 | Valor: ${window.cart.formatPrice(window.cart.getFinalTotal())}`
+    };
+
+    if (instructionsDiv) instructionsDiv.innerHTML = instructions[paymentMethod] || '';
+    if (detailsDiv) detailsDiv.style.display = 'block';
+  }
+
+  handlePaymentSubmit(e) {
+    e.preventDefault();
+    if (!this.selectedPayment) {
+      alert('Por favor, selecione um método de pagamento');
+      return;
+    }
+
+    const customerName = document.getElementById('customerName')?.value;
+    const customerPhone = document.getElementById('customerPhone')?.value;
+    const customerEmail = document.getElementById('customerEmail')?.value;
+
+    const orderData = {
+      orderId: this.generateOrderId(),
+      customerName,
+      customerPhone,
+      customerEmail,
+      paymentMethod: this.selectedPayment,
+      items: window.cart.items,
+      subtotal: window.cart.getTotal(),
+      tax: window.cart.getTax(),
+      total: window.cart.getFinalTotal(),
+      date: new Date().toLocaleString('pt-MZ')
+    };
+
+    this.sendOrderToWhatsApp(orderData);
+  }
+
+  sendOrderToWhatsApp(orderData) {
+    const message = this.formatOrderMessage(orderData);
+    const whatsappURL = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+    
+    this.saveOrder(orderData);
+    alert('Pedido confirmado! Redirecionando para WhatsApp...');
+    
+    window.cart.clear();
+    
+    const carrinhoModal = bootstrap.Modal.getInstance(document.getElementById('carrinhoModal'));
+    const pagamentoModal = bootstrap.Modal.getInstance(document.getElementById('pagamentoModal'));
+    if (carrinhoModal) carrinhoModal.hide();
+    if (pagamentoModal) pagamentoModal.hide();
+    
+    setTimeout(() => {
+      window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+    }, 1000);
+  }
+
+  formatOrderMessage(orderData) {
+    let message = `🛒 *PEDIDO MIQSHOP*\n\n`;
+    message += `📋 *ID:* ${orderData.orderId}\n`;
+    message += `👤 *Cliente:* ${orderData.customerName}\n`;
+    message += `📞 *Telefone:* ${orderData.customerPhone}\n\n`;
+    message += `*Produtos:*\n`;
+    orderData.items.forEach(item => {
+      message += `• ${item.name} x${item.quantity} = ${window.cart.formatPrice(item.price * item.quantity)}\n`;
+    });
+    message += `\n*Total: ${window.cart.formatPrice(orderData.total)}*\n`;
+    message += `💳 *Método:* ${this.getPaymentMethodName(orderData.paymentMethod)}\n`;
+    message += `📅 *Data:* ${orderData.date}`;
+    return message;
+  }
+
+  getPaymentMethodName(method) {
+    const names = { mpesa: 'M-Pesa', emola: 'E-Mola', ponto24: 'Ponto 24', bank: 'Transferência Bancária' };
+    return names[method] || method;
+  }
+
+  generateOrderId() {
+    return 'MIQ-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+  }
+
+  saveOrder(orderData) {
+    const orders = JSON.parse(localStorage.getItem('miqshop_orders')) || [];
+    orders.push(orderData);
+    localStorage.setItem('miqshop_orders', JSON.stringify(orders));
+  }
+}
+
+function addToCart(id, name, price, image) {
+  const product = { id, name, price, image };
+  window.cart.addItem(product);
+  const modal = new bootstrap.Modal(document.getElementById('carrinhoModal'));
+  modal.show();
+}
+
 // ===== INICIAR APLICAÇÃO =====
-new App();
+window.cart = null;
+window.payment = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.cart = new ShoppingCart();
+  window.payment = new PaymentSystem();
+  new App();
+  console.log('✅ MIQSHOP Carrinho e Pagamento carregado!');
+});
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!window.cart) {
+      window.cart = new ShoppingCart();
+      window.payment = new PaymentSystem();
+    }
+  });
+} else {
+  if (!window.cart) {
+    window.cart = new ShoppingCart();
+    window.payment = new PaymentSystem();
+  }
+}
