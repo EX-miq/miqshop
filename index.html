@@ -2575,7 +2575,7 @@
       const instructionsDiv = document.getElementById('paymentInstructions');
       
       const instructions = {
-        mpesa: `<strong>M-Pesa:</strong> +258 87 837 2764 | Valor: ${cart.formatPrice(cart.getFinalTotal())}`,
+        mpesa: `<strong>M-Pesa:</strong> +258 84 837 2764 | Valor: ${cart.formatPrice(cart.getFinalTotal())}`,
         emola: `<strong>E-Mola:</strong> +258 87 837 2764 | Valor: ${cart.formatPrice(cart.getFinalTotal())}`,
         ponto24: `<strong>Ponto 24:</strong> Valor: ${cart.formatPrice(cart.getFinalTotal())}`,
         bank: `<strong>BIM:</strong> ${BANK_ACCOUNTS.bim.account} | <strong>BCI:</strong> ${BANK_ACCOUNTS.bci.account} | <strong>FNB:</strong> ${BANK_ACCOUNTS.fnb.account} | Valor: ${cart.formatPrice(cart.getFinalTotal())}`
@@ -2632,11 +2632,14 @@
     }
 
     formatOrderMessage(orderData) {
-      let message = `🛒 *PEDIDO MIQSHOP*\n\n`;
-      message += `📋 *ID:* ${orderData.orderId}\n`;
-      message += `👤 *Cliente:* ${orderData.customerName}\n`;
-      message += `📞 *Telefone:* ${orderData.customerPhone}\n\n`;
-      message += `*Produtos:*\n`;
+      let message = `🛒 *NOVO PEDIDO - MIQSHOP*\n\n`;
+      message += `*DADOS DO CLIENTE:*\n`;
+      message += `👤 *Nome/Empresa:* ${customer.nome}\n`;
+      message += `📞 *Contacto:* ${customer.contacto}\n`;
+      message += `📧 *Email:* ${customer.email}\n`;
+      message += `📍 *Endereço:* ${customer.endereco}\n\n`;
+      message += `*PRODUTOS:*\n`;
+// ...
       orderData.items.forEach(item => {
         message += `• ${item.name} x${item.quantity} = ${cart.formatPrice(item.price * item.quantity)}\n`;
       });
@@ -2777,6 +2780,7 @@
 </div>
 </body>
 </html>
+
 
 
 
