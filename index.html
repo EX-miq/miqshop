@@ -1559,6 +1559,43 @@
       -webkit-backface-visibility: hidden;
     }
 
+  
+    /* ===== CORREÇÃO PARA SAFARI/MAC - OFFER CARDS ===== */
+    @supports (-webkit-appearance: none) {
+      .offer-card::before {
+        display: none !important;
+      }
+      
+      .offer-card {
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+      }
+    }
+    
+    /* ===== CORREÇÃO PARA SAFARI/MAC - SERVICE CARDS ===== */
+    @supports (-webkit-appearance: none) {
+      .service-card::before {
+        display: none !important;
+      }
+      
+      .service-card {
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+      }
+    }
+    
+    /* ===== CORREÇÃO PARA SAFARI/MAC - CONTACT CARDS ===== */
+    @supports (-webkit-appearance: none) {
+      .contact-card::before {
+        display: none !important;
+      }
+      
+      .contact-card {
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+      }
+    }
+
   </style>
 </head>
 
