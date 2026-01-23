@@ -1595,7 +1595,31 @@
         -webkit-backface-visibility: hidden;
       }
     }
-
+    /* ===== CORREÇÃO PARA SAFARI/MAC - IMAGE LOADING ===== */
+    img {
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+    
+    .offer-card img,
+    .category-circle img,
+    .promo-card img {
+      -webkit-appearance: none;
+      image-rendering: auto;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    
+    @supports (-webkit-appearance: none) {
+      .offer-card img,
+      .category-circle img,
+      .promo-card img {
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1000;
+      }
+    }
   </style>
 </head>
 
@@ -2836,6 +2860,7 @@
 </div>
 </body>
 </html>
+
 
 
 
