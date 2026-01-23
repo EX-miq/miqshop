@@ -1540,6 +1540,25 @@
   font-size: 0.9rem;
   margin-bottom: 0;
 }
+  
+    /* ===== CORREÇÃO PARA SAFARI/MAC - PROMO CARDS ===== */
+    @supports (-webkit-appearance: none) {
+      .promo-card::before {
+        display: none !important;
+      }
+      
+      .promo-card {
+        border: 3px solid #FFB74D !important;
+        background: var(--white) !important;
+      }
+    }
+    
+    /* Melhorar renderização em Safari */
+    .promo-card {
+      -webkit-transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+    }
+
   </style>
 </head>
 
@@ -2004,7 +2023,7 @@
       <div class="col-md-6 col-lg-4">
         <div class="promo-card fade-in-up">
           <div class="promo-image mb-3">
-            <img src="starlink.webp" alt="Promoção Laptop" class="img-fluid rounded">
+            <img src="https://raw.githubusercontent.com/EX-miq/miqshop/main/starlink.webp" alt="Promoção Laptop" class="img-fluid rounded">
           </div>
           <h4>Kit Starlink + Montagem</h4>
           <p>Internet de alta velocidade com conexão via satélite</p>
@@ -2019,7 +2038,7 @@
       <div class="col-md-6 col-lg-4">
         <div class="promo-card fade-in-up">
           <div class="promo-image mb-3">
-            <img src="kaspersky-internet-security-3.jpg" alt="Antivirus 3+1 kaspersky internet security" class="img-fluid rounded">
+            <img src="https://raw.githubusercontent.com/EX-miq/miqshop/main/kaspersky-internet-security-3.jpg" alt="Antivirus 3+1 kaspersky internet security" class="img-fluid rounded">
           </div>
           <h4>Antivirus Kaspersky 3 + 1</h4>
           <p>Proteção em tempo real. Bloqueio ransomware, cryptolockers & mais</p>
@@ -2034,7 +2053,7 @@
       <div class="col-md-6 col-lg-4">
         <div class="promo-card fade-in-up">
           <div class="promo-image mb-3">
-            <img src="monitor dell27.jpg" alt="Monitor Dell 27" Polegadas" class="img-fluid rounded">
+            <img src="https://raw.githubusercontent.com/EX-miq/miqshop/main/monitor%20dell27.jpg" alt="Monitor Dell 27" Polegadas" class="img-fluid rounded">
           </div>
           <h4>Monitor Dell 27" Polegadas</h4>
           <p>Modelo SE2725HM Full HD, Tecnologia Dell ComfortView Plus</p>
