@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de Tecnologia - MIQSHOP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --modern-red: #d32f2f;
+            --modern-dark-red: #c40000;
+            --modern-light-red: #ff6b6b;
+            --modern-orange: #FF9800;
+            --modern-purple: #9C27B0;
+            --modern-pink: #E91E63;
+            --dark-bg: #1a1a1a;
+            --dark-card: #2a2a2a;
+            --light-text: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+        }
+
+        /* Header */
+        .miq-topbar {
+            background: linear-gradient(135deg, var(--modern-red), var(--modern-dark-red));
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .miq-topbar {
+            background: linear-gradient(135deg, #8b0000, #6b0000);
+        }
+
+        .miq-topbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .miq-topbar-left {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .miq-topbar-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .miq-topbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .miq-topbar a:hover {
+            color: var(--modern-light-red);
+        }
+
+        .dark-mode-toggle {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Navigation */
+        .miq-navbar {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 60px;
+            z-index: 99;
+        }
+
+        body.dark-mode .miq-navbar {
+            background: var(--dark-card);
+            border-bottom: 1px solid #444;
+        }
+
+        .miq-navbar a {
+            color: var(--modern-red);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .miq-navbar a {
+            color: var(--modern-light-red);
+        }
+
+        .miq-navbar a:hover {
+            color: var(--modern-dark-red);
+        }
+
+        /* Hero Section */
+        .blog-hero {
+            background: linear-gradient(135deg, var(--modern-red), var(--modern-orange));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        body.dark-mode .blog-hero {
+            background: linear-gradient(135deg, #8b0000, #6b4400);
+        }
+
+        .blog-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .blog-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+
+        /* Search Bar */
+        .blog-search {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .blog-search input {
+            width: 400px;
+            padding: 12px 20px;
+            border: 2px solid var(--modern-red);
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        body.dark-mode .blog-search input {
+            background: var(--dark-card);
+            color: white;
+            border-color: var(--modern-light-red);
+        }
+
+        .blog-search button {
+            background: var(--modern-red);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .blog-search button:hover {
+            background: var(--modern-dark-red);
+        }
+
+        /* Categories */
+        .blog-categories {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid var(--modern-red);
+            color: var(--modern-red);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .category-btn {
+            background: var(--dark-card);
+            border-color: var(--modern-light-red);
+            color: var(--modern-light-red);
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--modern-red);
+            color: white;
+        }
+
+        body.dark-mode .category-btn:hover,
+        body.dark-mode .category-btn.active {
+            background: var(--modern-light-red);
+            color: #1a1a1a;
+        }
+
+        /* Blog Articles Grid */
+        .blog-articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        body.dark-mode .article-card {
+            background: var(--dark-card);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--modern-red), var(--modern-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-date {
+            color: var(--modern-red);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        body.dark-mode .article-date {
+            color: var(--modern-light-red);
+        }
+
+        .article-category {
+            display: inline-block;
+            background: var(--modern-red);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        body.dark-mode .article-category {
+            background: var(--modern-light-red);
+            color: #1a1a1a;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        body.dark-mode .article-title {
+            color: white;
+        }
+
+        .article-excerpt {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        body.dark-mode .article-excerpt {
+            color: #bbb;
+        }
+
+        .read-more-btn {
+            background: var(--modern-red);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .read-more-btn:hover {
+            background: var(--modern-dark-red);
+        }
+
+        /* Sidebar */
+        .blog-sidebar {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        body.dark-mode .blog-sidebar {
+            background: var(--dark-card);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--modern-red);
+            border-bottom: 2px solid var(--modern-red);
+            padding-bottom: 10px;
+        }
+
+        body.dark-mode .sidebar-title {
+            color: var(--modern-light-red);
+            border-bottom-color: var(--modern-light-red);
+        }
+
+        .sidebar-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        body.dark-mode .sidebar-item {
+            border-bottom-color: #444;
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-item a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .sidebar-item a {
+            color: #bbb;
+        }
+
+        .sidebar-item a:hover {
+            color: var(--modern-red);
+        }
+
+        body.dark-mode .sidebar-item a:hover {
+            color: var(--modern-light-red);
+        }
+
+        /* Newsletter */
+        .newsletter-box {
+            background: linear-gradient(135deg, var(--modern-red), var(--modern-orange));
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        body.dark-mode .newsletter-box {
+            background: linear-gradient(135deg, #8b0000, #6b4400);
+        }
+
+        .newsletter-box h4 {
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .newsletter-box input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 50px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .newsletter-box button {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            color: var(--modern-red);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-box button:hover {
+            background: #f0f0f0;
+        }
+
+        /* Footer */
+        .miq-footer-section {
+            background: var(--modern-red);
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        body.dark-mode .miq-footer-section {
+            background: #8b0000;
+            border-top: 1px solid #6b0000;
+        }
+
+        .footer-logo-space {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+        }
+
+        .footer-logo-space img {
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+        }
+
+        .footer-copyright {
+            background: rgba(0,0,0,0.2);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        body.dark-mode .footer-copyright {
+            background: rgba(0,0,0,0.3);
+            border-top-color: rgba(255,255,255,0.1);
+        }
+
+        .miq-footer-section h5 {
+            color: white !important;
+        }
+
+        .miq-footer-section p {
+            color: white !important;
+        }
+
+        .miq-footer-section a {
+            color: white !important;
+            text-decoration: none;
+        }
+
+        .miq-footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .miq-footer-section ul a {
+            color: white !important;
+        }
+
+        .whatsapp-float {
+            text-decoration: none !important;
+        }
+
+        .whatsapp-float:hover {
+            text-decoration: none !important;
+        }
+
+        /* Floating Buttons */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--modern-red);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+
+        .back-to-top:hover {
+            background: var(--modern-dark-red);
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 180px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--modern-red);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+
+        .dark-mode-toggle:hover {
+            background: var(--modern-dark-red);
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2rem;
+            }
+
+            .blog-search input {
+                width: 100%;
+            }
+
+            .blog-articles {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="miq-topbar">
+        <div class="container">
+            <div class="miq-topbar-content">
+                <div class="miq-topbar-left">
+                    <a href="index.html"><i class="fas fa-home"></i> Página Principal</a>
+                    <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
+
+                </div>
+                <div class="miq-topbar-right">
+                    <a href="https://wa.me/258878372764" target="_blank"><i class="fab fa-whatsapp"></i> +258 87 837 2764</a>
+                </div>
+            </div>
+        </div>
+        <button class="dark-mode-toggle" id="darkModeToggle" style="position: absolute; top: 15px; right: 20px;">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="miq-navbar">
+        <div class="container">
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <a href="index.html">MIQSHOP</a>
+                <a href="produtos.html#computadores">Computadores</a>
+                <a href="produtos.html#smartphones">Smartphones</a>
+                <a href="produtos.html#gaming">Gaming</a>
+                <a href="produtos.html#drones">Drones</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="blog-hero">
+        <div class="container">
+            <h1>Blog de Tecnologia MIQSHOP</h1>
+            <p>Descubra as últimas tendências e dicas sobre tecnologia em Moçambique</p>
+        </div>
+    </div>
+
+    <!-- Search and Categories -->
+    <div class="container">
+        <div class="blog-categories">
+            <button class="category-btn active">Todos</button>
+            <button class="category-btn">Smartphones</button>
+            <button class="category-btn">Laptops</button>
+            <button class="category-btn">Gaming</button>
+            <button class="category-btn">Drones</button>
+            <button class="category-btn">Áudio</button>
+            <button class="category-btn">TVs</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Articles -->
+            <div class="col-lg-8">
+                <div class="blog-articles" id="articlesContainer">
+                    <!-- Articles will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Newsletter -->
+                <div class="newsletter-box">
+                    <h4><i class="fas fa-envelope"></i> Subscrever Newsletter</h4>
+                    <p>Receba as últimas notícias sobre tecnologia</p>
+                    <input type="email" placeholder="Seu email">
+                    <button>Subscrever</button>
+                </div>
+
+                <!-- Popular Articles -->
+                <div class="blog-sidebar">
+                    <div class="sidebar-title">Artigos Populares</div>
+                    <div class="sidebar-item"><a href="#">Os Melhores Smartphones de 2024</a></div>
+                    <div class="sidebar-item"><a href="#">Como Escolher o Laptop Ideal</a></div>
+                    <div class="sidebar-item"><a href="#">Dicas para Montar um PC Gamer</a></div>
+                    <div class="sidebar-item"><a href="#">Smartwatches: Mais que um Relógio</a></div>
+                    <div class="sidebar-item"><a href="#">Drones em Moçambique</a></div>
+                </div>
+
+                <!-- Categories -->
+                <div class="blog-sidebar">
+                    <div class="sidebar-title">Categorias</div>
+                    <div class="sidebar-item"><a href="#">Smartphones (3)</a></div>
+                    <div class="sidebar-item"><a href="#">Laptops (2)</a></div>
+                    <div class="sidebar-item"><a href="#">Gaming (1)</a></div>
+                    <div class="sidebar-item"><a href="#">Drones (1)</a></div>
+                    <div class="sidebar-item"><a href="#">Áudio (1)</a></div>
+                    <div class="sidebar-item"><a href="#">TVs (1)</a></div>
+                    <div class="sidebar-item"><a href="#">Impressoras (1)</a></div>
+                </div>
+
+                <!-- Tags -->
+                <div class="blog-sidebar">
+                    <div class="sidebar-title">Tags Populares</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <span class="category-btn" style="font-size: 0.85rem; padding: 6px 12px;">2024</span>
+                        <span class="category-btn" style="font-size: 0.85rem; padding: 6px 12px;">2025</span>
+                        <span class="category-btn" style="font-size: 0.85rem; padding: 6px 12px;">Moçambique</span>
+                        <span class="category-btn" style="font-size: 0.85rem; padding: 6px 12px;">Tecnologia</span>
+                        <span class="category-btn" style="font-size: 0.85rem; padding: 6px 12px;">Dicas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Footer -->
+    <footer class="miq-footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="footer-logo-space">
+                        <!-- Imagem será adicionada aqui -->
+                        <img src="Sim Pode Confiar.png" alt="Sim, Pode Confiar!" class="miq-seal-img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h5>MIQSHOP</h5>
+                    <p>A sua loja de eletrónicos de confiança em Moçambique.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="politica-privacidade.html">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contacto</h5>
+                    <p><a href="https://wa.me/258878372764" target="_blank" style="text-decoration: none;"><i class="fab fa-whatsapp"></i> +258 87 837 2764</a></p>
+                    <p><a href="mailto:comercial@miqshop.com" style="text-decoration: none;"><i class="fas fa-envelope"></i> comercial@miqshop.com</a></p>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p style="margin: 0;">&copy; 2026 MIQSHOP, LDA - Todos os direitos reservados.<br>Desenvolvido por <strong>Group MIQ</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/258878372764" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <button id="darkModeToggleFloat" class="dark-mode-toggle" style="display: none;">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Articles Data
+        const articles = [
+            {
+                id: 1,
+                title: "Os Melhores Smartphones de 2024 para Comprar em Moçambique",
+                date: "05 de Fevereiro, 2026",
+                category: "Smartphones",
+                emoji: "📱",
+                excerpt: "O mercado de smartphones em Moçambique está mais competitivo do que nunca. Analisamos as melhores opções disponíveis no mercado nacional.",
+                link: "#"
+            },
+            {
+                id: 2,
+                title: "Como Escolher o Laptop Ideal para Trabalho e Estudo",
+                date: "05 de Fevereiro, 2026",
+                category: "Laptops",
+                emoji: "💻",
+                excerpt: "Seja para trabalho remoto, aulas online ou projetos universitários, um bom laptop é uma ferramenta essencial.",
+                link: "#"
+            },
+            {
+                id: 3,
+                title: "Dicas para Montar um PC Gamer de Topo em Moçambique",
+                date: "05 de Fevereiro, 2026",
+                category: "Gaming",
+                emoji: "🎮",
+                excerpt: "Montar um PC Gamer é o sonho de muitos entusiastas de jogos em Moçambique. Ter a liberdade de escolher cada componente.",
+                link: "#"
+            },
+            {
+                id: 4,
+                title: "Smartwatches em Moçambique: Mais do que um Relógio",
+                date: "05 de Fevereiro, 2026",
+                category: "Smartphones",
+                emoji: "⌚",
+                excerpt: "Os smartwatches tornaram-se um acessório indispensável, combinando estilo com funcionalidades que nos ajudam a manter um estilo de vida mais saudável.",
+                link: "#"
+            },
+            {
+                id: 5,
+                title: "Drones em Moçambique: Uma Nova Perspetiva",
+                date: "05 de Fevereiro, 2026",
+                category: "Drones",
+                emoji: "🚁",
+                excerpt: "Os drones estão a ganhar cada vez mais popularidade em Moçambique, seja para fotografia e videografia ou agricultura de precisão.",
+                link: "#"
+            },
+            {
+                id: 6,
+                title: "A Revolução das Smart TVs em Moçambique",
+                date: "05 de Fevereiro, 2026",
+                category: "TVs",
+                emoji: "📺",
+                excerpt: "As Smart TVs transformaram a forma como consumimos entretenimento em Moçambique. Com acesso a serviços de streaming como Netflix.",
+                link: "#"
+            },
+            {
+                id: 7,
+                title: "Áudio Profissional em Casa: O Guia para Moçambique",
+                date: "05 de Fevereiro, 2026",
+                category: "Áudio",
+                emoji: "🎙️",
+                excerpt: "Com o crescimento do podcasting e produção musical em Moçambique, ter um bom equipamento de áudio em casa tornou-se essencial.",
+                link: "#"
+            },
+            {
+                id: 8,
+                title: "Impressoras para o Escritório Moderno em Moçambique",
+                date: "05 de Fevereiro, 2026",
+                category: "Impressoras",
+                emoji: "🖨️",
+                excerpt: "Apesar da digitalização, a impressora continua a ser uma ferramenta essencial em qualquer escritório em Moçambique.",
+                link: "#"
+            }
+        ];
+
+        // Render Articles
+        function renderArticles(filter = 'Todos') {
+            const container = document.getElementById('articlesContainer');
+            const filtered = filter === 'Todos' ? articles : articles.filter(a => a.category === filter);
+            
+            container.innerHTML = filtered.map(article => `
+                <div class="article-card">
+                    <div class="article-image">${article.emoji}</div>
+                    <div class="article-content">
+                        <div class="article-date"><i class="fas fa-calendar"></i> ${article.date}</div>
+                        <span class="article-category">${article.category}</span>
+                        <h3 class="article-title">${article.title}</h3>
+                        <p class="article-excerpt">${article.excerpt}</p>
+                        <button class="read-more-btn">Ler Mais <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Category Filtering
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderArticles(this.textContent);
+            });
+        });
+
+        // Dark Mode
+        (function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const savedMode = localStorage.getItem('miqshop_darkMode');
+            
+            if (savedMode === 'enabled') {
+                body.classList.add('dark-mode');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            
+            darkModeToggle.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('miqshop_darkMode', 'enabled');
+                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    localStorage.setItem('miqshop_darkMode', 'disabled');
+                    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            };
+        })();
+
+        // Initial Render
+        renderArticles();
+    </script>
+</body>
+</html>
