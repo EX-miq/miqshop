@@ -286,29 +286,8 @@
       max-width: 100%;
       height: auto;
       border-radius: 10px;
-    }
-
-    /* ===== CAROUSEL ===== */
-    .carousel-indicators {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-
-    .carousel-indicator {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: #ddd;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .carousel-indicator.active {
-      background-color: var(--primary-red);
-      width: 30px;
-      border-radius: 6px;
+      object-fit: contain;
+      object-position: center;
     }
 
     /* ===== FEATURED SECTIONS ===== */
@@ -472,7 +451,8 @@
     .product-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center;
     }
 
     .stock-badge {
@@ -1857,11 +1837,11 @@
 
           <!-- CTA Buttons -->
           <div class="stats-cta-buttons">
-            <a href="#produtos" class="btn-primary-custom">
+            <a href="produtos.html#Laptops" class="btn-primary-custom">
               <i class="fas fa-shopping-cart"></i>
               Explorar Produtos
             </a>
-            <a href="#contato" class="btn-secondary-custom">
+            <a href="#contactos" class="btn-secondary-custom">
               <i class="fas fa-phone"></i>
               Fale Conosco
             </a>
@@ -1906,14 +1886,7 @@
   </div>
 </section>
 
-    <!-- Carousel Indicators -->
-    <div class="carousel-indicators">
-      <div class="carousel-indicator active" onclick="goToHeroSlide(0)"></div>
-      <div class="carousel-indicator" onclick="goToHeroSlide(1)"></div>
-      <div class="carousel-indicator" onclick="goToHeroSlide(2)"></div>
-      <div class="carousel-indicator" onclick="goToHeroSlide(3)"></div>
-      <div class="carousel-indicator" onclick="goToHeroSlide(4)"></div>
-    </div>
+
   </div>
 </section>
 
@@ -2879,14 +2852,7 @@
       addToCart(slide.productId, slide.productName, slide.price, '📱');
     };
 
-    // Update carousel indicators
-    document.querySelectorAll('.carousel-indicator').forEach((indicator, i) => {
-      if (i === index) {
-        indicator.classList.add('active');
-      } else {
-        indicator.classList.remove('active');
-      }
-    });
+
   }
 
   function nextHeroSlide() {
@@ -2896,11 +2862,6 @@
 
   function prevHeroSlide() {
     currentHeroSlide = (currentHeroSlide - 1 + heroSlides.length) % heroSlides.length;
-    updateHeroSlide(currentHeroSlide);
-  }
-
-  function goToHeroSlide(index) {
-    currentHeroSlide = index;
     updateHeroSlide(currentHeroSlide);
   }
 
