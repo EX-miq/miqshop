@@ -1,889 +1,988 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog de Tecnologia - MIQSHOP</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --modern-red: #d32f2f;
-            --modern-dark-red: #c40000;
-            --modern-light-red: #ff6b6b;
-            --modern-orange: #FF9800;
-            --modern-purple: #9C27B0;
-            --modern-pink: #E91E63;
-            --dark-bg: #1a1a1a;
-            --dark-card: #2a2a2a;
-            --light-text: #e0e0e0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        body.dark-mode {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-        }
-
-        /* Header */
-        .miq-topbar {
-            background: linear-gradient(135deg, var(--modern-red), var(--modern-dark-red));
-            color: white;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        body.dark-mode .miq-topbar {
-            background: linear-gradient(135deg, #8b0000, #6b0000);
-        }
-
-        .miq-topbar-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .miq-topbar-left {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .miq-topbar-right {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .miq-topbar a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-        }
-
-        .miq-topbar a:hover {
-            color: var(--modern-light-red);
-        }
-
-        .dark-mode-toggle {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode-toggle:hover {
-            background: rgba(255,255,255,0.3);
-        }
-
-        /* Navigation */
-        .miq-navbar {
-            background: white;
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 60px;
-            z-index: 99;
-        }
-
-        body.dark-mode .miq-navbar {
-            background: var(--dark-card);
-            border-bottom: 1px solid #444;
-        }
-
-        .miq-navbar a {
-            color: var(--modern-red);
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        body.dark-mode .miq-navbar a {
-            color: var(--modern-light-red);
-        }
-
-        .miq-navbar a:hover {
-            color: var(--modern-dark-red);
-        }
-
-        /* Hero Section */
-        .blog-hero {
-            background: linear-gradient(135deg, var(--modern-red), var(--modern-orange));
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        body.dark-mode .blog-hero {
-            background: linear-gradient(135deg, #8b0000, #6b4400);
-        }
-
-        .blog-hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .blog-hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-        }
-
-        /* Search Bar */
-        .blog-search {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-
-        .blog-search input {
-            width: 400px;
-            padding: 12px 20px;
-            border: 2px solid var(--modern-red);
-            border-radius: 50px;
-            font-size: 1rem;
-        }
-
-        body.dark-mode .blog-search input {
-            background: var(--dark-card);
-            color: white;
-            border-color: var(--modern-light-red);
-        }
-
-        .blog-search button {
-            background: var(--modern-red);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s ease;
-        }
-
-        .blog-search button:hover {
-            background: var(--modern-dark-red);
-        }
-
-        /* Categories */
-        .blog-categories {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-            justify-content: center;
-        }
-
-        .category-btn {
-            background: white;
-            border: 2px solid var(--modern-red);
-            color: var(--modern-red);
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode .category-btn {
-            background: var(--dark-card);
-            border-color: var(--modern-light-red);
-            color: var(--modern-light-red);
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background: var(--modern-red);
-            color: white;
-        }
-
-        body.dark-mode .category-btn:hover,
-        body.dark-mode .category-btn.active {
-            background: var(--modern-light-red);
-            color: #1a1a1a;
-        }
-
-        /* Blog Articles Grid */
-        .blog-articles {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .article-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        body.dark-mode .article-card {
-            background: var(--dark-card);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .article-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--modern-red), var(--modern-orange));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-
-        .article-content {
-            padding: 20px;
-        }
-
-        .article-date {
-            color: var(--modern-red);
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        body.dark-mode .article-date {
-            color: var(--modern-light-red);
-        }
-
-        .article-category {
-            display: inline-block;
-            background: var(--modern-red);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        body.dark-mode .article-category {
-            background: var(--modern-light-red);
-            color: #1a1a1a;
-        }
-
-        .article-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        body.dark-mode .article-title {
-            color: white;
-        }
-
-        .article-excerpt {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        body.dark-mode .article-excerpt {
-            color: #bbb;
-        }
-
-        .read-more-btn {
-            background: var(--modern-red);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s ease;
-            width: 100%;
-        }
-
-        .read-more-btn:hover {
-            background: var(--modern-dark-red);
-        }
-
-        /* Sidebar */
-        .blog-sidebar {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        body.dark-mode .blog-sidebar {
-            background: var(--dark-card);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .sidebar-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--modern-red);
-            border-bottom: 2px solid var(--modern-red);
-            padding-bottom: 10px;
-        }
-
-        body.dark-mode .sidebar-title {
-            color: var(--modern-light-red);
-            border-bottom-color: var(--modern-light-red);
-        }
-
-        .sidebar-item {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        body.dark-mode .sidebar-item {
-            border-bottom-color: #444;
-        }
-
-        .sidebar-item:last-child {
-            border-bottom: none;
-        }
-
-        .sidebar-item a {
-            color: #666;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        body.dark-mode .sidebar-item a {
-            color: #bbb;
-        }
-
-        .sidebar-item a:hover {
-            color: var(--modern-red);
-        }
-
-        body.dark-mode .sidebar-item a:hover {
-            color: var(--modern-light-red);
-        }
-
-        /* Newsletter */
-        .newsletter-box {
-            background: linear-gradient(135deg, var(--modern-red), var(--modern-orange));
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        body.dark-mode .newsletter-box {
-            background: linear-gradient(135deg, #8b0000, #6b4400);
-        }
-
-        .newsletter-box h4 {
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .newsletter-box input {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 50px;
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-
-        .newsletter-box button {
-            width: 100%;
-            padding: 12px;
-            background: white;
-            color: var(--modern-red);
-            border: none;
-            border-radius: 50px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .newsletter-box button:hover {
-            background: #f0f0f0;
-        }
-
-        /* Footer */
-        .miq-footer-section {
-            background: var(--modern-red);
-            color: white;
-            padding: 40px 0;
-            margin-top: 60px;
-        }
-
-        body.dark-mode .miq-footer-section {
-            background: #8b0000;
-            border-top: 1px solid #6b0000;
-        }
-
-        .footer-logo-space {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 150px;
-        }
-
-        .footer-logo-space img {
-            max-width: 100%;
-            max-height: 150px;
-            object-fit: contain;
-        }
-
-        .footer-copyright {
-            background: rgba(0,0,0,0.2);
-            padding: 20px 0;
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.2);
-        }
-
-        body.dark-mode .footer-copyright {
-            background: rgba(0,0,0,0.3);
-            border-top-color: rgba(255,255,255,0.1);
-        }
-
-        .miq-footer-section h5 {
-            color: white !important;
-        }
-
-        .miq-footer-section p {
-            color: white !important;
-        }
-
-        .miq-footer-section a {
-            color: white !important;
-            text-decoration: none;
-        }
-
-        .miq-footer-section a:hover {
-            text-decoration: underline;
-        }
-
-        .miq-footer-section ul a {
-            color: white !important;
-        }
-
-        .whatsapp-float {
-            text-decoration: none !important;
-        }
-
-        .whatsapp-float:hover {
-            text-decoration: none !important;
-        }
-
-        /* Floating Buttons */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            z-index: 50;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--modern-red);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            z-index: 50;
-        }
-
-        .back-to-top:hover {
-            background: var(--modern-dark-red);
-            transform: scale(1.1);
-        }
-
-        .dark-mode-toggle {
-            position: fixed;
-            bottom: 180px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--modern-red);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            z-index: 50;
-        }
-
-        .dark-mode-toggle:hover {
-            background: var(--modern-dark-red);
-            transform: scale(1.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .blog-hero h1 {
-                font-size: 2rem;
-            }
-
-            .blog-search input {
-                width: 100%;
-            }
-
-            .blog-articles {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - MIQSHOP | Notícias e Dicas sobre Tecnologia</title>
+  <meta name="description" content="Blog da MIQSHOP com as últimas notícias, reviews e dicas sobre tecnologia, eletrónicos e inovação.">
+  
+  <!-- Bootstrap 5.3.2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome 6.4.0 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary-red: #c40000;
+      --secondary-red: #d32f2f;
+      --modern-pink: #E91E63;
+      --modern-blue: #00BCD4;
+      --modern-purple: #9C27B0;
+      --dark-bg: #1a1a1a;
+      --light-gray: #f5f5f5;
+      --white: #ffffff;
+      --text-dark: #333333;
+      --text-light: #666666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-dark);
+      background-color: var(--light-gray);
+      line-height: 1.6;
+    }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      background-color: var(--primary-red);
+      color: var(--white);
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .top-bar a {
+      color: var(--white);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .top-bar a:hover {
+      opacity: 0.8;
+    }
+
+    /* ===== HEADER ===== */
+    .blog-header {
+      background: linear-gradient(135deg, var(--secondary-red), var(--primary-red));
+      color: var(--white);
+      padding: 3rem 0 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .blog-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* ===== SEARCH BAR ===== */
+    .search-bar {
+      background: var(--white);
+      padding: 1.5rem 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .search-input {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .search-input input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .search-input button {
+      background-color: var(--primary-red);
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .search-input button:hover {
+      background-color: var(--secondary-red);
+      transform: translateY(-2px);
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      padding: 3rem 0;
+    }
+
+    /* ===== BLOG CARD ===== */
+    .blog-card {
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      margin-bottom: 2rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+    }
+
+    .blog-card-image {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .blog-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .blog-card:hover .blog-card-image img {
+      transform: scale(1.05);
+    }
+
+    .blog-category-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--primary-red);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .blog-card-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .blog-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .blog-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .blog-title a {
+      color: var(--text-dark);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .blog-title a:hover {
+      color: var(--primary-red);
+    }
+
+    .blog-excerpt {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .blog-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .blog-author {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .author-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--modern-purple), var(--modern-pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+
+    .read-more {
+      color: var(--primary-red);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .read-more:hover {
+      gap: 0.6rem;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar-widget {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .sidebar-widget h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+      border-bottom: 2px solid var(--primary-red);
+      padding-bottom: 0.5rem;
+    }
+
+    .category-list {
+      list-style: none;
+    }
+
+    .category-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .category-list li:last-child {
+      border-bottom: none;
+    }
+
+    .category-list a {
+      color: var(--text-dark);
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      transition: color 0.3s;
+    }
+
+    .category-list a:hover {
+      color: var(--primary-red);
+    }
+
+    .category-count {
+      background: var(--light-gray);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
+
+    .recent-post {
+      display: flex;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .recent-post:last-child {
+      border-bottom: none;
+    }
+
+    .recent-post-image {
+      width: 70px;
+      height: 70px;
+      border-radius: 5px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .recent-post-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .recent-post-content h5 {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+
+    .recent-post-content h5 a {
+      color: var(--text-dark);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .recent-post-content h5 a:hover {
+      color: var(--primary-red);
+    }
+
+    .recent-post-date {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: var(--light-gray);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .tag:hover {
+      background: var(--primary-red);
+      color: white;
+    }
+
+    /* ===== PAGINATION ===== */
+    .pagination-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 3rem 0;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .pagination a {
+      padding: 0.6rem 1rem;
+      background: var(--white);
+      color: var(--text-dark);
+      text-decoration: none;
+      border-radius: 5px;
+      transition: all 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .pagination a:hover,
+    .pagination a.active {
+      background: var(--primary-red);
+      color: white;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background-color: #1a1a1a;
+      color: #ccc;
+      padding: 3rem 0 1rem;
+      margin-top: 3rem;
+    }
+
+    .footer-section {
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h4 {
+      color: var(--white);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .footer-section a:hover {
+      color: var(--primary-red);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 2rem;
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    /* ===== MODAL STYLES ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      position: relative;
+      animation: slideIn 0.3s ease;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.3s;
+    }
+
+    .modal-close:hover {
+      color: var(--primary-red);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .blog-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .blog-card-image {
+        height: 180px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="miq-topbar">
-        <div class="container">
-            <div class="miq-topbar-content">
-                <div class="miq-topbar-left">
-                    <a href="index.html"><i class="fas fa-home"></i> Página Principal</a>
-                    <a href="produtos.html"><i class="fas fa-shopping-bag"></i> Produtos</a>
-
-                </div>
-                <div class="miq-topbar-right">
-                    <a href="https://wa.me/258878372764" target="_blank"><i class="fab fa-whatsapp"></i> +258 87 837 2764</a>
-                </div>
-            </div>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <a href="tel:+258848372764"><i class="fas fa-phone"></i> (+258) 84 837 2764</a>
+          <span style="margin: 0 1rem;">|</span>
+          <a href="mailto:comercial@miqshop.com"><i class="fas fa-envelope"></i> comercial@miqshop.com</a>
         </div>
-        <button class="dark-mode-toggle" id="darkModeToggle" style="position: absolute; top: 15px; right: 20px;">
-            <i class="fas fa-moon"></i>
-        </button>
-    </div>
-
-    <!-- Navigation Bar -->
-    <div class="miq-navbar">
-        <div class="container">
-            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                <a href="index.html">MIQSHOP</a>
-                <a href="produtos.html#computadores">Computadores</a>
-                <a href="produtos.html#smartphones">Smartphones</a>
-                <a href="produtos.html#gaming">Gaming</a>
-                <a href="produtos.html#drones">Drones</a>
-            </div>
+        <div class="col-md-6 text-end">
+          <a href="index.html" style="margin-right: 1rem;"><i class="fas fa-home"></i> Início</a>
+          <a href="produtos.html" style="margin-right: 1rem;"><i class="fas fa-shopping-bag"></i> Produtos</a>
+          <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Hero Section -->
-    <div class="blog-hero">
-        <div class="container">
-            <h1>Blog de Tecnologia MIQSHOP</h1>
-            <p>Descubra as últimas tendências e dicas sobre tecnologia em Moçambique</p>
-        </div>
-    </div>
-
-    <!-- Search and Categories -->
+  <!-- HEADER -->
+  <div class="blog-header text-center">
     <div class="container">
-        <div class="blog-categories">
-            <button class="category-btn active">Todos</button>
-            <button class="category-btn">Smartphones</button>
-            <button class="category-btn">Laptops</button>
-            <button class="category-btn">Gaming</button>
-            <button class="category-btn">Drones</button>
-            <button class="category-btn">Áudio</button>
-            <button class="category-btn">TVs</button>
-        </div>
+      <h1><i class="fas fa-newspaper"></i> Blog MIQSHOP</h1>
+      <p>Notícias, Reviews e Dicas sobre Tecnologia</p>
     </div>
+  </div>
 
-    <!-- Main Content -->
+  <!-- SEARCH BAR -->
+  <div class="search-bar">
     <div class="container">
-        <div class="row">
-            <!-- Articles -->
-            <div class="col-lg-8">
-                <div class="blog-articles" id="articlesContainer">
-                    <!-- Articles will be inserted here -->
-                </div>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="col-lg-4">
-                <!-- Newsletter -->
-                <div class="newsletter-box">
-                    <h4><i class="fas fa-envelope"></i> Subscrever Newsletter</h4>
-                    <p>Receba as últimas notícias sobre tecnologia</p>
-                    <input type="email" placeholder="Seu email">
-                    <button>Subscrever</button>
-                </div>
-
-                <!-- Popular Articles -->
-                <div class="blog-sidebar">
-                    <div class="sidebar-title">Artigos Populares</div>
-                    <div class="sidebar-item"><a href="#">Os Melhores Smartphones de 2024</a></div>
-                    <div class="sidebar-item"><a href="#">Como Escolher o Laptop Ideal</a></div>
-                    <div class="sidebar-item"><a href="#">Dicas para Montar um PC Gamer</a></div>
-                    <div class="sidebar-item"><a href="#">Smartwatches: Mais que um Relógio</a></div>
-                    <div class="sidebar-item"><a href="#">Drones em Moçambique</a></div>
-                </div>
-
-                <!-- Categories -->
-                <div class="blog-sidebar">
-                    <div class="sidebar-title">Categorias</div>
-                    <div class="sidebar-item"><a href="#">Smartphones (3)</a></div>
-                    <div class="sidebar-item"><a href="#">Laptops (2)</a></div>
-                    <div class="sidebar-item"><a href="#">Gaming (1)</a></div>
-                    <div class="sidebar-item"><a href="#">Drones (1)</a></div>
-                    <div class="sidebar-item"><a href="#">Áudio (1)</a></div>
-                    <div class="sidebar-item"><a href="#">TVs (1)</a></div>
-                    <div class="sidebar-item"><a href="#">Impressoras (1)</a></div>
-                </div>
-
-                <!-- Tags -->
-                <div class="blog-sidebar">
-                    <div class="sidebar-title">Tags Populares</div>
-                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                        <span class="category-btn" style="font-size: 0.85rem; padding: 6px 12px;">2024</span>
-                        <span class="category-btn" style="font-size: 0.85rem; padding: 6px 12px;">2025</span>
-                        <span class="category-btn" style="font-size: 0.85rem; padding: 6px 12px;">Moçambique</span>
-                        <span class="category-btn" style="font-size: 0.85rem; padding: 6px 12px;">Tecnologia</span>
-                        <span class="category-btn" style="font-size: 0.85rem; padding: 6px 12px;">Dicas</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div class="search-input">
+        <input type="text" placeholder="Pesquisar artigos, produtos, notícias...">
+        <button><i class="fas fa-search"></i> Pesquisar</button>
+      </div>
     </div>
+  </div>
 
-     <!-- Footer -->
-    <footer class="miq-footer-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="footer-logo-space">
-                        <!-- Imagem será adicionada aqui -->
-                        <img src="Sim Pode Confiar.png" alt="Sim, Pode Confiar!" class="miq-seal-img">
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container">
+      <div class="row">
+        <!-- BLOG POSTS -->
+        <div class="col-lg-8">
+          <div class="row">
+            <!-- Post 1 - ROG Zephyrus Duo -->
+            <div class="col-md-6">
+              <div class="blog-card">
+                <div class="blog-card-image">
+                  <img src="ASUS ROG Zephyrus Duo.jpg" alt="ASUS ROG Zephyrus Duo">
+                  <a href="produtos.html#laptops" class="blog-category-badge" style="text-decoration: none; color: white;">Laptops</a>
+                </div>
+                <div class="blog-card-content">
+                  <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 10 Fev 2026</span>
+                    <span><i class="fas fa-eye"></i> 2.5K</span>
+                  </div>
+                  <div class="blog-title">
+                    <a href="#">CES 2026: ASUS ROG Zephyrus Duo - O Futuro dos Laptops Gaming</a>
+                  </div>
+                  <p class="blog-excerpt">O novo ROG Zephyrus Duo apresentado na CES 2026 revoluciona o conceito de laptop gaming com dois ecrãs integrados, processador Intel Core Ultra e RTX 5090.</p>
+                  <div class="blog-footer">
+                    <div class="blog-author">
+                      <div class="author-avatar">MIQ</div>
                     </div>
+                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
+                  </div>
                 </div>
-                <div class="col-md-3">
-                    <h5>MIQSHOP</h5>
-                    <p>A sua loja de eletrónicos de confiança em Moçambique.</p>
-                </div>
-                <div class="col-md-3">
-                    <h5>Links Rápidos</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="produtos.html">Produtos</a></li>
-                        <li><a href="politica-privacidade.html">Política de Privacidade</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Contacto</h5>
-                    <p><a href="https://wa.me/258878372764" target="_blank" style="text-decoration: none;"><i class="fab fa-whatsapp"></i> +258 87 837 2764</a></p>
-                    <p><a href="mailto:comercial@miqshop.com" style="text-decoration: none;"><i class="fas fa-envelope"></i> comercial@miqshop.com</a></p>
-                </div>
+              </div>
             </div>
-            <div class="footer-copyright">
-                <p style="margin: 0;">&copy; 2026 MIQSHOP, LDA - Todos os direitos reservados.<br>Desenvolvido por <strong>Group MIQ</strong></p>
+
+            <!-- Post 2 - Lenovo Rollable -->
+            <div class="col-md-6">
+              <div class="blog-card">
+                <div class="blog-card-image">
+                  <img src="Lenovo Revela.jpg" alt="Lenovo Rollable">
+                  <div class="blog-category-badge">Inovação</div>
+                </div>
+                <div class="blog-card-content">
+                  <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 9 Fev 2026</span>
+                    <span><i class="fas fa-eye"></i> 3.1K</span>
+                  </div>
+                  <div class="blog-title">
+                    <a href="#https://www.ces.tech/search?q=Lenovo">Lenovo Revela Laptops com Ecrã Enrolável na CES 2026</a>
+                  </div>
+                  <p class="blog-excerpt">A Lenovo surpreendeu o mundo com dois conceitos revolucionários de laptops com ecrãs enroláveis que expandem verticalmente, oferecendo mais espaço de trabalho.</p>
+                  <div class="blog-footer">
+                    <div class="blog-author">
+                      <div class="author-avatar">MIQ</div>
+                    </div>
+                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <!-- Post 3 - ROG Gaming Gear -->
+            <div class="col-md-6">
+              <div class="blog-card">
+                <div class="blog-card-image">
+                  <img src="Asus Just.jpg" alt="ROG Gaming Gear">
+                  <a href="produtos.html#gaming" class="blog-category-badge" style="text-decoration: none; color: white;">Gaming</a>
+                </div>
+                <div class="blog-card-content">
+                  <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 8 Fev 2026</span>
+                    <span><i class="fas fa-eye"></i> 1.8K</span>
+                  </div>
+                  <div class="blog-title">
+                    <a href="#">Novos Periféricos ROG: Teclados, Mouses e Headsets</a>
+                  </div>
+                  <p class="blog-excerpt">A ASUS ROG lançou uma linha completa de periféricos gaming na CES 2026, incluindo o teclado mecânico ROG Azoth Extreme e o mouse ROG Harpe Ace Extreme.</p>
+                  <div class="blog-footer">
+                    <div class="blog-author">
+                      <div class="author-avatar">MIQ</div>
+                    </div>
+                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Post 4 - Tesla Pi Phone -->
+            <div class="col-md-6">
+              <div class="blog-card">
+                <div class="blog-card-image">
+                  <img src="Tesla.jpeg" alt="Tesla Pi Phone">
+                  <a href="produtos.html#smartphones" class="blog-category-badge" style="text-decoration: none; color: white;">Smartphones</a>
+                </div>
+                <div class="blog-card-content">
+                  <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 7 Fev 2026</span>
+                    <span><i class="fas fa-eye"></i> 4.2K</span>
+                  </div>
+                  <div class="blog-title">
+                    <a href="#">Tesla Pi Phone 2026: Rumores, Preço e Data de Lançamento</a>
+                  </div>
+                  <p class="blog-excerpt">O aguardado Tesla Pi Phone pode finalmente chegar em 2026 com conectividade Starlink, carregamento solar e integração total com veículos Tesla.</p>
+                  <div class="blog-footer">
+                    <div class="blog-author">
+                      <div class="author-avatar">MIQ</div>
+                    </div>
+                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Post 5 - 2026 Flagships -->
+            <div class="col-md-6">
+              <div class="blog-card">
+                <div class="blog-card-image">
+                  <img src="leica.jpg" alt="2026 Flagships">
+                  <a href="produtos.html#smartphones" class="blog-category-badge" style="text-decoration: none; color: white;">Smartphones</a>
+                </div>
+                <div class="blog-card-content">
+                  <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 6 Fev 2026</span>
+                    <span><i class="fas fa-eye"></i> 2.9K</span>
+                  </div>
+                  <div class="blog-title">
+                    <a href="#">Os Smartphones Mais Aguardados de 2026</a>
+                  </div>
+                  <p class="blog-excerpt">Samsung Galaxy S26 Ultra, iPhone 18 Pro Max, Xiaomi 16 Ultra e OnePlus 13 Pro lideram a lista dos flagships mais esperados deste ano.</p>
+                  <div class="blog-footer">
+                    <div class="blog-author">
+                      <div class="author-avatar">MIQ</div>
+                    </div>
+                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Post 6 - Nokia Innovation -->
+            <div class="col-md-6">
+              <div class="blog-card">
+                <div class="blog-card-image">
+                  <img src="nokia.jpg" alt="Nokia Innovation">
+                  <div class="blog-category-badge">Inovação</div>
+                </div>
+                <div class="blog-card-content">
+                  <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 5 Fev 2026</span>
+                    <span><i class="fas fa-eye"></i> 1.6K</span>
+                  </div>
+                  <div class="blog-title">
+                    <a href="#">Nokia: Inovações Secretas que Vão Mudar 2026</a>
+                  </div>
+                  <p class="blog-excerpt">A Nokia está a trabalhar em tecnologias revolucionárias além de smartphones, incluindo redes 6G, IoT e soluções empresariais de próxima geração.</p>
+                  <div class="blog-footer">
+                    <div class="blog-author">
+                      <div class="author-avatar">MIQ</div>
+                    </div>
+                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Post 7 - Gaming Setup -->
+            <div class="col-md-6">
+              <div class="blog-card">
+                <div class="blog-card-image">
+                  <img src="setup gamer.jpg" alt="Gaming Setup">
+                  <a href="produtos.html#gaming" class="blog-category-badge" style="text-decoration: none; color: white;">Gaming</a>
+                </div>
+                <div class="blog-card-content">
+                  <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 4 Fev 2026</span>
+                    <span><i class="fas fa-eye"></i> 3.5K</span>
+                  </div>
+                  <div class="blog-title">
+                    <a href="#">Guia Completo: Como Montar o Setup Gaming Perfeito</a>
+                  </div>
+                  <p class="blog-excerpt">Descubra como criar o setup gaming ideal com as melhores escolhas de monitor, teclado, mouse, cadeira e iluminação RGB para 2026.</p>
+                  <div class="blog-footer">
+                    <div class="blog-author">
+                      <div class="author-avatar">MIQ</div>
+                    </div>
+                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Post 8 - Gaming Journalist Setup -->
+            <div class="col-md-6">
+              <div class="blog-card">
+                <div class="blog-card-image">
+                  <img src="desk-setup.jpg" alt="Professional Gaming Setup">
+                  <div class="blog-category-badge">Reviews</div>
+                </div>
+                <div class="blog-card-content">
+                  <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 3 Fev 2026</span>
+                    <span><i class="fas fa-eye"></i> 2.1K</span>
+                  </div>
+                  <div class="blog-title">
+                    <a href="#">Setup de Jornalista Tech: O Que Uso no Meu Dia a Dia</a>
+                  </div>
+                  <p class="blog-excerpt">Um olhar profundo no setup de trabalho de um jornalista de tecnologia e gaming, incluindo equipamentos, software e organização do espaço.</p>
+                  <div class="blog-footer">
+                    <div class="blog-author">
+                      <div class="author-avatar">MIQ</div>
+                    </div>
+                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAGINATION -->
+          <div class="pagination-wrapper">
+            <div class="pagination">
+              
+            </div>
+          </div>
         </div>
-    </footer>
 
-    <!-- Floating Buttons -->
-    <a href="https://wa.me/258878372764" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    <button id="backToTop" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-    <button id="darkModeToggleFloat" class="dark-mode-toggle" style="display: none;">
-        <i class="fas fa-moon"></i>
-    </button>
+        <!-- SIDEBAR -->
+        <div class="col-lg-4">
+          <!-- Categories Widget -->
+          <div class="sidebar-widget">
+            <h4><i class="fas fa-folder"></i> Categorias</h4>
+            <ul class="category-list">
+              <li><a href="produtos.html#laptops">Laptops <span class="category-count">24</span></a></li>
+              <li><a href="produtos.html#smartphones">Smartphones <span class="category-count">31</span></a></li>
+              <li><a href="produtos.html#gaming">Gaming <span class="category-count">18</span></a></li>
+              <li><a href="#">Reviews <span class="category-count">42</span></a></li>
+              <li><a href="#">Inovação <span class="category-count">15</span></a></li>
+              <li><a href="#">Dicas <span class="category-count">27</span></a></li>
+            </ul>
+          </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Articles Data
-        const articles = [
-            {
-                id: 1,
-                title: "Os Melhores Smartphones de 2024 para Comprar em Moçambique",
-                date: "05 de Fevereiro, 2026",
-                category: "Smartphones",
-                emoji: "📱",
-                excerpt: "O mercado de smartphones em Moçambique está mais competitivo do que nunca. Analisamos as melhores opções disponíveis no mercado nacional.",
-                link: "#"
-            },
-            {
-                id: 2,
-                title: "Como Escolher o Laptop Ideal para Trabalho e Estudo",
-                date: "05 de Fevereiro, 2026",
-                category: "Laptops",
-                emoji: "💻",
-                excerpt: "Seja para trabalho remoto, aulas online ou projetos universitários, um bom laptop é uma ferramenta essencial.",
-                link: "#"
-            },
-            {
-                id: 3,
-                title: "Dicas para Montar um PC Gamer de Topo em Moçambique",
-                date: "05 de Fevereiro, 2026",
-                category: "Gaming",
-                emoji: "🎮",
-                excerpt: "Montar um PC Gamer é o sonho de muitos entusiastas de jogos em Moçambique. Ter a liberdade de escolher cada componente.",
-                link: "#"
-            },
-            {
-                id: 4,
-                title: "Smartwatches em Moçambique: Mais do que um Relógio",
-                date: "05 de Fevereiro, 2026",
-                category: "Smartphones",
-                emoji: "⌚",
-                excerpt: "Os smartwatches tornaram-se um acessório indispensável, combinando estilo com funcionalidades que nos ajudam a manter um estilo de vida mais saudável.",
-                link: "#"
-            },
-            {
-                id: 5,
-                title: "Drones em Moçambique: Uma Nova Perspetiva",
-                date: "05 de Fevereiro, 2026",
-                category: "Drones",
-                emoji: "🚁",
-                excerpt: "Os drones estão a ganhar cada vez mais popularidade em Moçambique, seja para fotografia e videografia ou agricultura de precisão.",
-                link: "#"
-            },
-            {
-                id: 6,
-                title: "A Revolução das Smart TVs em Moçambique",
-                date: "05 de Fevereiro, 2026",
-                category: "TVs",
-                emoji: "📺",
-                excerpt: "As Smart TVs transformaram a forma como consumimos entretenimento em Moçambique. Com acesso a serviços de streaming como Netflix.",
-                link: "#"
-            },
-            {
-                id: 7,
-                title: "Áudio Profissional em Casa: O Guia para Moçambique",
-                date: "05 de Fevereiro, 2026",
-                category: "Áudio",
-                emoji: "🎙️",
-                excerpt: "Com o crescimento do podcasting e produção musical em Moçambique, ter um bom equipamento de áudio em casa tornou-se essencial.",
-                link: "#"
-            },
-            {
-                id: 8,
-                title: "Impressoras para o Escritório Moderno em Moçambique",
-                date: "05 de Fevereiro, 2026",
-                category: "Impressoras",
-                emoji: "🖨️",
-                excerpt: "Apesar da digitalização, a impressora continua a ser uma ferramenta essencial em qualquer escritório em Moçambique.",
-                link: "#"
-            }
-        ];
+          <!-- Recent Posts Widget -->
+          <div class="sidebar-widget">
+            <h4><i class="fas fa-clock"></i> Posts Recentes</h4>
+            <div class="recent-post">
+              <div class="recent-post-image">
+                <img src="ASUS ROG Zephyrus Duo.jpg" alt="ROG Zephyrus">
+              </div>
+              <div class="recent-post-content">
+                <h5><a href="#">ASUS ROG Zephyrus Duo na CES 2026</a></h5>
+                <div class="recent-post-date"><i class="fas fa-calendar"></i> 10 Fev 2026</div>
+              </div>
+            </div>
+            <div class="recent-post">
+              <div class="recent-post-image">
+                <img src="Tesla.jpeg" alt="Tesla Pi">
+              </div>
+              <div class="recent-post-content">
+                <h5><a href="#">Tesla Pi Phone: Rumores e Preço</a></h5>
+                <div class="recent-post-date"><i class="fas fa-calendar"></i> 7 Fev 2026</div>
+              </div>
+            </div>
+            <div class="recent-post">
+              <div class="recent-post-image">
+                <img src="desk-setup.jpg" alt="Gaming Setup">
+              </div>
+              <div class="recent-post-content">
+                <h5><a href="#">Setup de Jornalista Tech</a></h5>
+                <div class="recent-post-date"><i class="fas fa-calendar"></i> 3 Fev 2026</div>
+              </div>
+            </div>
+          </div>
 
-        // Render Articles
-        function renderArticles(filter = 'Todos') {
-            const container = document.getElementById('articlesContainer');
-            const filtered = filter === 'Todos' ? articles : articles.filter(a => a.category === filter);
-            
-            container.innerHTML = filtered.map(article => `
-                <div class="article-card">
-                    <div class="article-image">${article.emoji}</div>
-                    <div class="article-content">
-                        <div class="article-date"><i class="fas fa-calendar"></i> ${article.date}</div>
-                        <span class="article-category">${article.category}</span>
-                        <h3 class="article-title">${article.title}</h3>
-                        <p class="article-excerpt">${article.excerpt}</p>
-                        <button class="read-more-btn">Ler Mais <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                </div>
-            `).join('');
-        }
+          <!-- Tags Widget -->
+          <div class="sidebar-widget">
+            <h4><i class="fas fa-tags"></i> Tags Populares</h4>
+            <div class="tag-cloud">
+              <a href="#" class="tag">CES 2026</a>
+              <a href="#gaming" class="tag">Gaming</a>
+              <a href="#computadores" class="tag">Laptops</a>
+              <a href="#smartphones" class="tag">Smartphones</a>
+              <a href="#" class="tag">ROG</a>
+              <a href="#" class="tag">RTX 5090</a>
+              <a href="#" class="tag">Intel</a>
+              <a href="#" class="tag">Reviews</a>
+              <a href="#" class="tag">Inovação</a>
+              <a href="#" class="tag">Tesla</a>
+            </div>
+          </div>
 
-        // Category Filtering
-        document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                renderArticles(this.textContent);
-            });
-        });
+          <!-- Newsletter Widget -->
+          <div class="sidebar-widget" style="background: linear-gradient(135deg, var(--primary-red), var(--secondary-red)); color: white;">
+            <h4 style="color: white; border-color: white;"><i class="fas fa-envelope"></i> Newsletter</h4>
+            <p style="margin-bottom: 1rem;">Receba as últimas notícias e ofertas exclusivas!</p>
+            <form style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <input type="email" placeholder="Seu email" style="padding: 0.75rem; border: none; border-radius: 5px;">
+              <button type="submit" style="background-color: white; color: var(--primary-red); border: none; padding: 0.75rem; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                <i class="fas fa-paper-plane"></i> Subscrever
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        // Dark Mode
-        (function() {
-            const darkModeToggle = document.getElementById('darkModeToggle');
-            const body = document.body;
-            const savedMode = localStorage.getItem('miqshop_darkMode');
-            
-            if (savedMode === 'enabled') {
-                body.classList.add('dark-mode');
-                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-            
-            darkModeToggle.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                body.classList.toggle('dark-mode');
-                
-                if (body.classList.contains('dark-mode')) {
-                    localStorage.setItem('miqshop_darkMode', 'enabled');
-                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                } else {
-                    localStorage.setItem('miqshop_darkMode', 'disabled');
-                    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                }
-            };
-        })();
+  <!-- POLICY MODAL -->
+  <div class="modal-overlay" id="policyModal">
+    <div class="modal-content" style="max-height: 90vh; overflow-y: auto; width: 90%; max-width: 800px;">
+      <div class="modal-header">
+        <h3 style="margin: 0;">Política de Privacidade</h3>
+        <button class="modal-close" onclick="closePolicyModal()">×</button>
+      </div>
+      <div class="modal-body" style="padding: 2rem;">
+        <!-- Política de Entregas -->
+        <div style="margin-bottom: 2rem;">
+          <h4 style="color: var(--primary-red); margin-bottom: 1rem;"><i class="fas fa-shipping-fast"></i> Política de Entregas</h4>
+          <p>A MIQSHOP realiza entregas em todo o território nacional, com logística adaptada à realidade de cada província. Os prazos de entrega variam de acordo com a localização e volume da encomenda:</p>
+          <ul style="margin-top: 1rem;">
+            <li><strong>Maputo e Províncias do Sul:</strong> 1h a 24h</li>
+            <li><strong>Centro e Norte do País:</strong> 1 a 2 dias úteis</li>
+            <li><strong>Grandes Encomendas Corporativas:</strong> Prazo personalizado mediante acordo</li>
+          </ul>
+          <p style="margin-top: 1rem; padding: 1rem; background: rgba(196, 0, 0, 0.1); border-left: 4px solid var(--primary-red);">Todas as entregas são acompanhadas por comprovativo e suporte pós-venda.</p>
+        </div>
 
-        // Initial Render
-        renderArticles();
-    </script>
+        <!-- Garantia de Produtos -->
+        <div style="margin-bottom: 2rem;">
+          <h4 style="color: var(--primary-red); margin-bottom: 1rem;"><i class="fas fa-shield-alt"></i> Garantia de Produtos</h4>
+          <p>Garantimos a qualidade de todos os nossos produtos. A maioria dos equipamentos e acessórios MIQSHOP conta com garantia de 6 a 12 meses, dependendo do fabricante.</p>
+          <p style="margin-top: 1rem;"><strong>Em caso de defeito de fabrico:</strong></p>
+          <ul style="margin-top: 0.5rem;">
+            <li>Substituição ou Reparo Gratuito - Sem custos adicionais</li>
+            <li>Suporte Técnico - Remoto ou presencial</li>
+            <li>Gestão de Garantia - Direta com o fornecedor</li>
+          </ul>
+        </div>
+
+        <!-- Devoluções e Reembolsos -->
+        <div style="margin-bottom: 2rem;">
+          <h4 style="color: var(--primary-red); margin-bottom: 1rem;"><i class="fas fa-undo"></i> Devoluções e Reembolsos</h4>
+          <p>A MIQSHOP aceita devoluções em até 7 dias após a entrega, desde que o produto:</p>
+          <ul style="margin-top: 0.5rem;">
+            <li>Esteja em perfeitas condições (sem danos ou sinais de uso)</li>
+            <li>Tenha a embalagem original com todos os acessórios</li>
+            <li>Tenha a factura de compra</li>
+          </ul>
+          <p style="margin-top: 1rem; padding: 1rem; background: rgba(196, 0, 0, 0.1); border-left: 4px solid var(--primary-red);">Os reembolsos são realizados no prazo de até 10 dias úteis, após verificação e validação do estado do produto.</p>
+        </div>
+
+        <!-- Contactos e Suporte -->
+        <div style="margin-bottom: 2rem;">
+          <h4 style="color: var(--primary-red); margin-bottom: 1rem;"><i class="fas fa-headset"></i> Contactos e Suporte</h4>
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div style="padding: 1rem; background: #f5f5f5; border-radius: 5px;">
+              <strong><i class="fab fa-whatsapp"></i> WhatsApp:</strong><br>
+              <a href="https://wa.me/258878372764" target="_blank" style="color: var(--primary-red); text-decoration: none;">+258 87 837 2764</a>
+            </div>
+            <div style="padding: 1rem; background: #f5f5f5; border-radius: 5px;">
+              <strong><i class="fas fa-envelope"></i> Email:</strong><br>
+              <a href="mailto:comercial@miqshop.com" style="color: var(--primary-red); text-decoration: none;">comercial@miqshop.com</a>
+            </div>
+            <div style="padding: 1rem; background: #f5f5f5; border-radius: 5px;">
+            <strong><i class="fas fa-phone"></i> Telefone:</strong><br>
+            <a href="tel:+258878372764" style="color: var(--primary-red); text-decoration: none;">+258 84 837 2764</a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="footer-section">
+            <h4>MIQSHOP</h4>
+            <p style="color: #fff; font-weight: 600; margin-bottom: 1rem;">Soluções completas em tecnologia para todo Moçambique.</p>
+            <img src="Sim Pode Confiar.png" alt="Sim Pode Confiar" style="max-width: 150px; margin-top: 1rem;">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="footer-section">
+            <h4>Links Úteis</h4>
+            <a href="index.html"><i class="fas fa-angle-right"></i> Início</a>
+            <a href="produtos.html"><i class="fas fa-angle-right"></i> Produtos</a>
+            <a href="blog.html"><i class="fas fa-angle-right"></i> Blog</a>
+            <a href="#" onclick="openPolicyModal(); return false;"><i class="fas fa-angle-right"></i> Política de Privacidade</a>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="footer-section">
+            <h4>Pagamento & Entrega</h4>
+            <p><i class="fas fa-credit-card"></i> Transferência Bancária</p>
+            <p><i class="fas fa-mobile-alt"></i> M-Pesa</p>
+            <p><i class="fas fa-money-bill-wave"></i> E-Mola</p>
+            <p><i class="fas fa-credit-card"></i> Ponto 24</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">Entrega em todo Moçambique</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="footer-section">
+            <h4>Contactos</h4>
+            <p><i class="fas fa-phone"></i> (+258) 84 837 2764</p>
+            <p><i class="fas fa-envelope"></i> comercial@miqshop.com</p>
+            <h4 style="margin-top: 1.5rem;">Redes Sociais</h4>
+            <div style="margin-top: 1rem;">
+              <a href="#" style="display: inline-block; margin-right: 1rem;"><i class="fab fa-facebook" style="color: #1877f2; font-size: 1.5rem;"></i></a>
+              <a href="#" style="display: inline-block; margin-right: 1rem;"><i class="fab fa-instagram" style="color: #e4405f; font-size: 1.5rem;"></i></a>
+              <a href="#" style="display: inline-block;"><i class="fab fa-linkedin" style="color: #0077b5; font-size: 1.5rem;"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 MIQSHOP - Todos os direitos reservados.</p>
+        <p>Desenvolvido por Group MIQ</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ===== POLICY MODAL =====
+    function openPolicyModal() {
+      document.getElementById('policyModal').classList.add('active');
+    }
+
+    function closePolicyModal() {
+      document.getElementById('policyModal').classList.remove('active');
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('policyModal').addEventListener('click', (e) => {
+      if (e.target.id === 'policyModal') {
+        closePolicyModal();
+      }
+    });
+  </script>
+
 </body>
 </html>
